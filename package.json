@@ -1,0 +1,25 @@
+{
+  "name": "coloradoCourtsApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ezagala/coloradoCourtsApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ezagala/coloradoCourtsApp/issues"
+  },
+  "homepage": "https://github.com/ezagala/coloradoCourtsApp#readme",
+  "dependencies": {
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.8"
+  }
+}
