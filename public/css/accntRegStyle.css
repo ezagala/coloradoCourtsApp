@@ -1,0 +1,23 @@
+body {
+    background-image: url("./../assets/cityCourthouse1.jpg"); 
+    background-size: cover;  
+}
+
+#title {
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;  
+    font-family: 'Montserrat', sans-serif;
+    color: #3F3F3F; 
+}
+
+#createAccount {
+    background: rgb(0, 25, 87); /* This is for ie8 and below */
+    background: rgba(230, 213, 213, 0.8); 
+    padding: 1em 2em; 
+    border-radius: 10px;
+}
+
+.container {
+    margin-bottom: 2.5%; 
+}
