@@ -8,7 +8,8 @@
     <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/homeStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 </head>
 
 <body>
@@ -21,8 +22,8 @@
 
             <div class="col-8" id="title">
                 <h1 class="display-4">Interpreter Management</h1>
-                <hr class="my-4">
                 <p class="lead">Easily manage your case load and do a bunch of other things. It'll be great.</p>
+                <hr class="my-4">
             </div>
 
             <div class="col-2"></div>
@@ -38,12 +39,12 @@
                 <!-- THIS FORM IS FROM THE PASSPORT WEBSITE, WORKED FOR ME WITH THE HARDCODED USER -->
                 <form action="/login" method="post">
                     <div class="form-group">
-                        <label for="inputEmail">Username:</label>
-                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="username"
+                        <label for="inputEmail">Please enter your credentials: </label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email" name="username"
                         />
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword">Password:</label>
+                        <!-- <label for="inputPassword"></label> -->
                         <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
                     </div>
                     <div>
@@ -51,11 +52,11 @@
                         <button type="submit" value="Log In" class="btn btn-primary btn-lg btn-block">Submit</button>
                     </div>
                 </form>
-                <br>
+                <p id="or">Or</p> 
                 <div>
                     <button type="button" class="btn btn-secondary btn-lg btn-block">Create an account!</button>
                 </div>
-                <br> 
+                
 
             </div>
 
