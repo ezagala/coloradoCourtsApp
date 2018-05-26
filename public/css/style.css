@@ -3,10 +3,10 @@ body {
     background-size: cover;  
 }
 
-.jumbotron {
-    background: rgb(0, 25, 87); /* This is for ie8 and below */
-    background: rgba(230, 213, 213, 0.8); 
- }
+#title {
+    text-align: center;
+    margin-top: 6%; 
+}
 
  .accountAndLogin {
     background: rgb(0, 25, 87); /* This is for ie8 and below */
