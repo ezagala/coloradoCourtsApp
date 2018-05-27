@@ -18,6 +18,10 @@ body {
     border-radius: 10px;
 }
 
+#please {
+    text-align: center; 
+}
+
 .container {
     margin-bottom: 2.5%; 
 }
