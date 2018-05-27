@@ -8,11 +8,11 @@ app.post("/api/vendor", function(req, res) {
     db.Vendor.create({
       firstName: req.body.first,
       lastName: req.body.last,
-      phone_num: req.body.phone,
+      phone: req.body.phone,
       address: req.body.address,
       city: req.body.city,
       state: req.body.state,
-      zip_code: req.body.zip,
+      zip: req.body.zip,
       email: req.body.email,
       password: req.body.password
     })
