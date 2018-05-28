@@ -22,6 +22,12 @@ body {
     text-align: center; 
 }
 
+#home {
+    text-align: right; 
+}
+
+
+
 .container {
     margin-bottom: 2.5%; 
 }
