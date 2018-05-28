@@ -1,20 +1,212 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>My Account</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  <script src="main.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../public/css/myAcount.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../public/js/myAccount.js"></script>
 </head>
+
 <body>
-  <h1>Account Page</h1>
-    <ul>
-      <li>Availablity</li>
-      <li>Languages and Certificates</li>
-      <li>Rates</li>
-      <li>Edit Info</li>
-    </ul>
+
+  <div class="container">
+
+    <nav class="navbar">
+      <a href="#" id="calendar">
+        <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Calendar">
+          <img src="../public/assets/calendar.png" width="30" height="30" alt="Calendar icon">
+        </button>
+      </a>
+      <a href="#" id="signOut">
+        <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Sign out">
+          <img src="../public/assets/signOut.png" width="30" height="30" alt="Sign out icon">
+        </button>
+      </a>
+    </nav>
+
+
+    <!-- Headline -->
+    <div class="row">
+
+      <div class="col-2"></div>
+
+      <div class="col-8" id="title">
+        <h1 class="display-4">My Account</h1>
+      </div>
+
+      <div class="col-2"></div>
+
+    </div>
+
+    <!-- Personal information -->
+    <div class="row">
+
+      <div class="col-1"></div>
+
+      <div class="col-10 formStyle">
+
+        <form>
+          <h4>Personal information:</h4>
+          <hr>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="First Name" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="Last Name" disabled>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Email" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password" disabled>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPhone">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="(123) 456-7899" disabled>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="address" placeholder="1234 Main St" disabled>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">City</label>
+              <input type="text" class="form-control" id="city" disabled>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">State</label>
+              <select id="state" class="form-control" disabled>
+                <option selected>Choose...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">Zip</label>
+              <input type="text" class="form-control" id="zip" disabled>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#submitModal" id="signUp">Edit</button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">One moment!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to change your account info?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success">Yes!</button>
+                  <button type="button" class="btn btn-danger">No.</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-1"></div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-1"></div>
+
+      <div class="col-10 formStyle">
+        <form>
+          <h4>Vendor Information:</h4>
+          <hr>
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="rates">Rate per hour:</label>
+              <hr>
+              <input type="text" class="form-control" id="rates" placeholder="E.g. $20.25" disabled>
+              <br>
+              <button type="button" class="btn btn-secondary">Edit</button>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-sm">
+              <label for="languages">Languages:</label>
+              <hr>
+              <select multiple class="form-control" id="languages">
+                <option>English</option>
+                <option>Spanish</option>
+                <option>Vietnamese</option>
+                <option>African*</option>
+                <option>German</option>
+                <option>Navajo</option>
+                <option>Swedish</option>
+                <option>Hindi</option>
+              </select>
+              <p>
+                <small>*Amharic, Ibo, Twi, Yoruba, Bantu, Swahili, Somali</small>
+              </p>
+              <button type="button" class="btn btn-secondary">Add</button>
+            </div>
+
+            <div class="form-group col-md-6 col-sm">
+              <label for="certificates">Certificates:</label>
+              <hr>
+              <select multiple class="form-control" id="certificates">
+                <option>Certificate One</option>
+                <option>Certificate Two</option>
+                <option>Certificate Three</option>
+                <option>Certificate Four</option>
+                <option>Certificate Five</option>
+              </select>
+              <button type="button" class="btn btn-secondary" style="margin-top: 8%;">Add</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- Script to populate the state dropdown -->
+  <script>
+
+    const states = ['AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
+
+    states.forEach(element => {
+      let option = $("<option>")
+      $(option).text(element);
+      $('#state').append(option);
+    })
+
+  </script>
+
 </body>
+
 </html>

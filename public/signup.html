@@ -16,12 +16,11 @@
 
 <body>
 
-
   <div class="container">
 
-    <nav class="navbar d-flex justify-content-end">
+    <nav class="navbar">
       <a class="navbar-brand " href="../public/index.html" id="home">
-        <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="right" title="Home">
+        <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Home">
           <img src="../public/assets/home.png" width="30" height="30" alt="Home icon"> 
         </button>
       </a>
@@ -44,9 +43,9 @@
     <!-- Account form -->
     <div class="row">
 
-      <div class="col-2"></div>
+      <div class="col-1"></div>
 
-      <div class="col-8" id="createAccount">
+      <div class="col-10" id="createAccount">
         <p id="please">Please take a few moments to tell us about yourself.</p>
         <hr>
         <form>
@@ -95,7 +94,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#submitModal" id="signUp">Submit!</button>
+          <button type="submit" class="btn btn-primary btn-block" data-toggle="modal" data-target="#submitModal" id="signUp">Submit!</button>
 
           <!-- Modal -->
           <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
@@ -108,7 +107,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  Please click the "login" button below.
+                  Please click the "Login!" button below.
                 </div>
                 <div class="modal-footer">
                   <a type="button" class="btn btn-primary" href="../public/index.html">Login!</a>
@@ -119,6 +118,7 @@
 
         </form>
       </div>
+      <div class="col-1"></div>
     </div>
   </div>
 
