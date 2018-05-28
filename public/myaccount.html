@@ -19,11 +19,13 @@
   <div class="container">
 
     <nav class="navbar">
+      
       <a href="#" id="calendar">
         <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Calendar">
           <img src="../public/assets/calendar.png" width="30" height="30" alt="Calendar icon">
         </button>
       </a>
+
       <a href="#" id="signOut">
         <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Sign out">
           <img src="../public/assets/signOut.png" width="30" height="30" alt="Sign out icon">
@@ -40,9 +42,7 @@
       <div class="col-8" id="title">
         <h1 class="display-4">My Account</h1>
       </div>
-
       <div class="col-2"></div>
-
     </div>
 
     <!-- Personal information -->
@@ -55,6 +55,7 @@
         <form>
           <h4>Personal information:</h4>
           <hr>
+
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="firstName">First Name</label>
@@ -65,6 +66,7 @@
               <input type="text" class="form-control" id="lastName" placeholder="Last Name" disabled>
             </div>
           </div>
+
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="email">Email</label>
@@ -75,14 +77,17 @@
               <input type="password" class="form-control" id="password" placeholder="Password" disabled>
             </div>
           </div>
+
           <div class="form-group">
             <label for="inputPhone">Phone</label>
             <input type="text" class="form-control" id="phone" placeholder="(123) 456-7899" disabled>
           </div>
+
           <div class="form-group">
             <label for="inputAddress">Address</label>
             <input type="text" class="form-control" id="address" placeholder="1234 Main St" disabled>
           </div>
+          
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputCity">City</label>
@@ -100,8 +105,8 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#submitModal" id="signUp">Edit</button>
-
+          <button type="submit" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal" id="signUp">Edit</button>
+          <button type="button" class="btn btn-primary">Save</button>
           <!-- Modal -->
           <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -133,17 +138,20 @@
 
       <div class="col-10 formStyle">
         <form>
+
           <h4>Vendor Information:</h4>
           <hr>
+
           <div class="form-row">
             <div class="form-group col">
               <label for="rates">Rate per hour:</label>
-              <hr>
               <input type="text" class="form-control" id="rates" placeholder="E.g. $20.25" disabled>
               <br>
               <button type="button" class="btn btn-secondary">Edit</button>
+              <button type="button" class="btn btn-primary">Save</button>
             </div>
           </div>
+
           <div class="form-row">
             <div class="form-group col-md-6 col-sm">
               <label for="languages">Languages:</label>
@@ -161,7 +169,7 @@
               <p>
                 <small>*Amharic, Ibo, Twi, Yoruba, Bantu, Swahili, Somali</small>
               </p>
-              <button type="button" class="btn btn-secondary">Add</button>
+              <button type="button" class="btn btn-primary">Add</button>
             </div>
 
             <div class="form-group col-md-6 col-sm">
@@ -174,15 +182,12 @@
                 <option>Certificate Four</option>
                 <option>Certificate Five</option>
               </select>
-              <button type="button" class="btn btn-secondary" style="margin-top: 8%;">Add</button>
+              <button type="button" class="btn btn-primary" style="margin-top: 8%;">Add</button>
             </div>
           </div>
-
         </form>
       </div>
-
     </div>
-
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
