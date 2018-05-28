@@ -26,11 +26,14 @@ $(function(){
             Vendor: newUser
         }).then( () => {
             // Confirm that newUser was posted
-            console.log("Posted new user: " + newUser) 
-            // Reload the page, this should clear the fields too 
-            location.reload(); 
+            console.log("Posted new user: " + newUser)  
         })
         
     })
+
+    // intialize tooltip
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
 
 })
