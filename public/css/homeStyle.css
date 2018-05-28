@@ -1,0 +1,29 @@
+body {
+    background-image: url("./../assets/cityCourthouse1.jpg"); 
+    background-size: cover;  
+}
+
+#title {
+    text-align: center;
+    margin-top: 5%; 
+    font-family: 'Montserrat', sans-serif;
+    color: #3F3F3F; 
+}
+
+hr {
+    width: 80%; 
+    border-top: 1px solid rgba(0,0,0, .3);
+}
+
+#or {
+    padding-top: 1em; 
+    /* text-align: center;  */
+}
+
+ .accountAndLogin {
+    font-family: 'Arimo', sans-serif;
+    background: rgb(0, 25, 87); /* This is for ie8 and below */
+    background: rgba(230, 213, 213, 0.8); 
+    padding: 1em 2em; 
+    border-radius: 10px;
+ }

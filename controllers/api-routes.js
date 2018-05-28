@@ -3,11 +3,11 @@ var db = require("../models");
 
 module.exports = function(app) {
 
-app.post("/api/posts", function(req, res) {
+app.post("/api/vendor", function(req, res) {
     console.log(req.body);
     db.Vendor.create({
-      first: req.body.first,
-      last: req.body.last,
+      firstName: req.body.first,
+      lastName: req.body.last,
       phone: req.body.phone,
       address: req.body.address,
       city: req.body.city,

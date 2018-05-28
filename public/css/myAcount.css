@@ -1,0 +1,34 @@
+body {
+    background-image: url("./../assets/Lindsey-FlaniganCourthouse3.jpg"); 
+    background-size: cover;  
+}
+
+/* .container {
+    margin-bottom: 2.5%; 
+} */
+
+.navbar {
+    margin-top: 1.5%; 
+    display: inherit; 
+}
+
+#title {
+    text-align: center;
+    /* margin-top: 2%; */
+    margin-bottom: 2%;  
+    font-family: 'Montserrat', sans-serif;
+    color: #303030; 
+}
+
+/* hr {
+    width: 80%; 
+    border-top: 2px solid rgba(0,0,0, .3);
+}  */
+
+.formStyle {
+    background: rgb(0, 25, 87); /* This is for ie8 and below */
+    background: rgba(230, 213, 213, 0.8); 
+    padding: 1em 2em; 
+    border-radius: 10px;
+    margin-bottom: 2.5%; 
+}
