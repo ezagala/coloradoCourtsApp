@@ -45,6 +45,7 @@ const user = {
     password: "password",
     id: 1
 }
+
 // defining authentication strategy 
 passport.use(new LocalStrategy(
   function(username, password, done) {

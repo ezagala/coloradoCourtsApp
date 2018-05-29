@@ -10,9 +10,14 @@ body {
     color: #3F3F3F; 
 }
 
+hr {
+    width: 80%; 
+    border-top: 1px solid rgba(0,0,0, .3);
+}
+
 #or {
     padding-top: 1em; 
-    text-align: center; 
+    /* text-align: center;  */
 }
 
  .accountAndLogin {
