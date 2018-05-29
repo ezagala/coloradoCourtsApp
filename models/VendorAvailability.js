@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   VendorAvailability.associate = function(models) {
-    // We're saying that a VendorAvailability should belong to an Vendor
+    // We're saying that a VendorAvailability should belong to a Vendor
     // A VendorAvailability can't be created without an Vendor due to the foreign key constraint
     VendorAvailability.belongsTo(models.Vendor, {
       foreignKey: {
