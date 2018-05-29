@@ -1,17 +1,3 @@
-<<<<<<< .merge_file_a25604
-// Dependencies
-var express = require("express");
-var bodyParser = require("body-parser");
-var session = require("express-session");
-
-// Require Passport
-
-// Set up the Express App
-var app = express();
-var PORT = process.env.PORT || 8080;
-
-var db = require("./models")
-=======
 const express = require("express")
 const bodyParser = require("body-parser")
 const session = require("express-session")
@@ -100,4 +86,3 @@ passport.deserializeUser(function(id, done) {
   app.listen(3000)
 
   module.exports = app
->>>>>>> .merge_file_a22756
