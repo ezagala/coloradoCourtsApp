@@ -4,14 +4,14 @@ module.exports = function(sequelize, DataTypes) {
     vendorId: DataTypes.INTEGER,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    phone_num: DataTYPES.STRING,
-    address: DataTYPES.STRING,
-    city: DataTYPES.STRING,
-    state: DataTYPES.STRING,
-    zip_code: DataTYPES.STRING,
-    email: DataTYPES.STRING,
-    password: DataTYPES.STRING,
-    approved: DataTYPES.BOOLEAN,
+    phone_num: DataTypes.STRING,
+    address: DataTypes.STRING,
+    city: DataTypes.STRING,
+    state: DataTypes.STRING,
+    zip_code: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    approved: DataTypes.BOOLEAN,
   });
 
   Vendor.associate = function(models) {
