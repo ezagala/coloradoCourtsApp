@@ -5,17 +5,31 @@ $(function () {
     // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
     $('[data-toggle="tooltip"]').tooltip()
 
-    // Button click targeting the edit button that enables fields so that the user may change them.
-    $("#signUp").on("click", event => {
+    // Button click targeting the edit button that enables personal info fields
+    $("#personalEdit").on("click", event => {
         event.preventDefault(); 
 
-        let attr = $("input").attr("disabled");
+        let attr = $(".personalInput").attr("disabled");
             
         if (attr === "disabled") {
-         $("input").removeAttr("disabled");
+         $(".personalInput").removeAttr("disabled");
          attr = undefined; 
         } else if (attr === undefined){
-            $("input").attr("disabled", "disabled");
+            $(".personalInput").attr("disabled", "disabled");
+        }
+    })
+
+    // Button click targeting the edit button that enables rate field 
+    $("#rateEdit").on("click", event => {
+        event.preventDefault(); 
+
+        let attr = $("#rates").attr("disabled");
+            
+        if (attr === "disabled") {
+         $("#rates").removeAttr("disabled");
+         attr = undefined; 
+        } else if (attr === undefined){
+            $("#rates").attr("disabled", "disabled");
         }
     })
 
