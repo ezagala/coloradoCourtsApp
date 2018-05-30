@@ -32,6 +32,28 @@ $(function () {
             $("#rates").attr("disabled", "disabled");
         }
     })
+    
+    // This creates an alert if the fields in the Personal Information area is empty
+    $("#savePiButton").on("click", event => {
+        event.preventDefault(); 
+
+        var name = $.trim($(".personalInput").val());
+        if (name === "") {
+            alert ("Text field should not be empty");
+            return false;
+        }
+    });
+
+    // This creates an alert if the fields in the "Rate per hour" is empty
+    $("#saveRateButton").on("click", event => {
+        event.preventDefault(); 
+
+        var name = $.trim($("#rates").val());
+        if (name === "") {
+            alert ("Text field should not be empty");
+            return false;
+        }
+    });
 
   });
 
