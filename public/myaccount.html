@@ -19,7 +19,7 @@
   <div class="container">
 
     <nav class="navbar">
-      
+
       <a href="#" id="calendar">
         <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Calendar">
           <img src="../public/assets/calendar.png" width="30" height="30" alt="Calendar icon">
@@ -87,7 +87,7 @@
             <label for="inputAddress">Address</label>
             <input type="text" class="form-control personalInput" id="address" placeholder="1234 Main St" disabled>
           </div>
-          
+
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputCity">City</label>
@@ -154,36 +154,100 @@
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-6 col-sm">
+            <div class="form-check col-md-6 col-sm">
               <label for="languages">Languages:</label>
               <hr>
-              <select multiple class="form-control" id="languages">
-                <option>English</option>
-                <option>Spanish</option>
-                <option>Vietnamese</option>
-                <option>African*</option>
-                <option>German</option>
-                <option>Navajo</option>
-                <option>Swedish</option>
-                <option>Hindi</option>
-              </select>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="English" disabled>
+                <label class="form-check-label" for="English" disabled>
+                  English
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="Spanish" disabled>
+                <label class="form-check-label" for="Spanish">
+                  Spanish
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="Vietnamese" disabled>
+                <label class="form-check-label" for="Vietnamese">
+                  Vietnamese
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="African" disabled>
+                <label class="form-check-label" for="African">
+                  African*
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="German" disabled>
+                <label class="form-check-label" for="German">
+                  German
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="Navajo" disabled>
+                <label class="form-check-label" for="Navajo">
+                  Navajo
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="Swedish" disabled>
+                <label class="form-check-label" for="Swedish">
+                  Swedish
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input language" type="checkbox" value="" id="Hindi" disabled>
+                <label class="form-check-label" for="Hindi">
+                  Hindi
+                </label>
+              </div>
               <p>
                 <small>*Amharic, Ibo, Twi, Yoruba, Bantu, Swahili, Somali</small>
               </p>
+              <button type="button" class="btn btn-secondary" id="languageEdit">Edit</button>
               <button type="button" class="btn btn-primary">Add</button>
             </div>
 
             <div class="form-group col-md-6 col-sm">
               <label for="certificates">Certificates:</label>
               <hr>
-              <select multiple class="form-control" id="certificates">
-                <option>Certificate One</option>
-                <option>Certificate Two</option>
-                <option>Certificate Three</option>
-                <option>Certificate Four</option>
-                <option>Certificate Five</option>
-              </select>
-              <button type="button" class="btn btn-primary" style="margin-top: 8%;">Add</button>
+              <div class="form-check">
+                <input class="form-check-input cert" type="checkbox" value="" id="certificateOne" disabled>
+                <label class="form-check-label" for="certificateOne">
+                  Certificate One
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input cert" type="checkbox" value="" id="certificateTwo" disabled>
+                <label class="form-check-label" for="certificateTwo">
+                  Certificate Two
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input cert" type="checkbox" value="" id="certificateThree" disabled>
+                <label class="form-check-label" for="certificateThree">
+                  Certificate Three
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input cert" type="checkbox" value="" id="certificateFour" disabled>
+                <label class="form-check-label" for="certificateFour">
+                  Certificate Four
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input cert" type="checkbox" value="" id="certificateFive" disabled>
+                <label class="form-check-label" for="certificateFive">
+                  Certificate Five
+                </label>
+              </div>
+              <br>
+              <button type="button" class="btn btn-secondary" id="certificateEdit">Edit</button>
+              <button type="button" class="btn btn-primary">Add</button>
             </div>
           </div>
         </form>
