@@ -48,6 +48,7 @@ $(function () {
             zip: $("#zip").val().trim(),
             email: $("#email").val().trim(), 
             password: $("#password").val().trim()
+         }
 
     });
 
