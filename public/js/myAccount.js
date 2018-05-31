@@ -17,7 +17,7 @@ $(function () {
         } else if (attr === undefined){
             $(".personalInput").attr("disabled", "disabled");
         }
-    })
+    });
 
     // Button click targeting the edit button that enables rate field 
     $("#rateEdit").on("click", event => {
@@ -31,27 +31,34 @@ $(function () {
         } else if (attr === undefined){
             $("#rates").attr("disabled", "disabled");
         }
-    })
-    
-    // This creates an alert if the fields in the Personal Information area is empty
-    $("#savePiButton").on("click", event => {
+    });
+
+    //Button click targeting the edit button enables languages boxes
+    $("#languageEdit").on("click", event => {
         event.preventDefault(); 
 
-        var name = $.trim($(".personalInput").val());
-        if (name === "") {
-            alert ("Text field should not be empty");
-            return false;
+        let attr = $(".language").attr("disabled");
+            
+        if (attr === "disabled") {
+         $(".language").removeAttr("disabled");
+         attr = undefined; 
+        } else if (attr === undefined){
+            $(".language").attr("disabled", "disabled");
         }
     });
 
-    // This creates an alert if the fields in the "Rate per hour" is empty
-    $("#saveRateButton").on("click", event => {
+    //Button click targeting the edit button enables certificate boxes
+
+    $("#certificateEdit").on("click", event => {
         event.preventDefault(); 
 
-        var name = $.trim($("#rates").val());
-        if (name === "") {
-            alert ("Text field should not be empty");
-            return false;
+        let attr = $(".cert").attr("disabled");
+            
+        if (attr === "disabled") {
+         $(".cert").removeAttr("disabled");
+         attr = undefined; 
+        } else if (attr === undefined){
+            $(".cert").attr("disabled", "disabled");
         }
     });
 
