@@ -30,7 +30,8 @@ module.exports = function(app) {
   })
 
   // myaccount route loads myaccount.html
-  app.get("/account", isAuthenticated, function (req, res) {
+  // isAuthenticated argument removed for testing purposess
+  app.get("/account", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/myaccount.html"));
   })
 
@@ -43,11 +44,11 @@ module.exports = function(app) {
   //   passport.authenticate('local', {
   //     successRedirect: '/account',
   //     failureRedirect: '/',
-      // failureFlash: true
-    // })
-    // function(req,res){
-    //   console.log("redirect")
-    //   res.redirect("/")
-    // }
+  //     failureFlash: true
+  //   })
+  //   // function(req,res){
+  //   //   console.log("redirect")
+  //   //   res.redirect("/")
+  //   // }
   // );
 };
