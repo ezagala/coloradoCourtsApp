@@ -35,8 +35,8 @@ module.exports = function(app) {
   })
 
   // calendar route loads calendar.html
-  app.get("/calendar", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/calendar.html"));
+  app.get("/availability", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/availability.html"));
   })
 
   app.post('/login',
