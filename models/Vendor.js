@@ -11,6 +11,9 @@ module.exports = function(sequelize, DataTypes) {
     zip_code: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    rate: DataTypes.STRING,
+    languages: DataTypes.STRING,
+    certificates: DataTypes.STRING,
     approved: DataTypes.BOOLEAN,
   });
 

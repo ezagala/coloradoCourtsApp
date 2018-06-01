@@ -1,14 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
   var VendorRate = sequelize.define("VendorRate", {
     vendor_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
     rate_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
   });
 
