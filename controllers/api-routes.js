@@ -3,7 +3,8 @@ var db = require("../models");
 
 module.exports = function(app) {
 
-app.post("/api/vendor", function(req, res) {
+// We need to convert this into a put route to accommodate user edits
+app.put("/api/vendor", function(req, res) {
     console.log(req.body);
     db.Vendor.create({
       vendorId: req.body.vendorId,

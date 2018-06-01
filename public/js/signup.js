@@ -1,12 +1,17 @@
 $(function(){
 
+console.log("I'm here")
+
+
     // Listener that hits post route to add new user
     $("#signUp").on('click', event => {
 
         event.preventDefault();
 
+        console.log("I'm here again")
+
         // Capture vales and build obejct to pass into ajax call
-        const newUser = {
+        const user = {
             firstName: $("#firstName").val().trim(), 
             lastName: $("#lastName").val().trim(), 
             phone: $("#phone").val().trim(),
@@ -19,14 +24,16 @@ $(function(){
         }
 
         // Check to see that object was built correctly
-        console.log("The new user is: " + JSON.stringify(newUser)); 
+        console.log("The new user is: " + JSON.stringify(user)); 
         
         // Make ajax call 
-        $.post("/api/vendor", {
-            Vendor: newUser
+        $.ajax({
+            method: "PUT",
+            url: "/api/vendor",
+            data: user, 
         }).then( () => {
             // Confirm that newUser was posted
-            console.log("Posted new user: " + newUser)  
+            console.log("Posted new user: " + user)  
         })
         
     })

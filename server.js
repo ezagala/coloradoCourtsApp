@@ -34,6 +34,8 @@ require("./controllers/api-routes.js")(app);
 require("./controllers/html-routes.js")(app);
 
 
+// configure logger 
+// app.use(logger("dev"))
 
 
 const user = {
@@ -104,7 +106,17 @@ passport.deserializeUser(function(id, done) {
     // });
   });
 
-  // app.listen(PORT)
+// Whit had the port commented out 
+// app.listen(PORT)
+
+// Lines 113 through 119 were deleted from whit's file 
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+//db.sequelize.sync({ force: true }).then(function() {
+  //app.listen(PORT, function() {
+   // console.log("App listening on PORT " + PORT);
+ // });
+//});
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
