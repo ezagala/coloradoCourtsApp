@@ -2,6 +2,7 @@
 // All code should be added inside this scope unless it *should not* be executed immediately
 $(function () {
 
+    
 
     console.log("I'm here.")
 
@@ -10,4 +11,6 @@ $(function () {
 
     
 
-}); 
+});
+
+
