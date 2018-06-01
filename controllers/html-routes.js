@@ -39,15 +39,15 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/availability.html"));
   })
 
-  app.post('/login',
-    passport.authenticate('local', {
-      successRedirect: '/account',
-      failureRedirect: '/',
+  // app.post('/login',
+  //   passport.authenticate('local', {
+  //     successRedirect: '/account',
+  //     failureRedirect: '/',
       // failureFlash: true
-    })
+    // })
     // function(req,res){
     //   console.log("redirect")
     //   res.redirect("/")
     // }
-  );
+  // );
 };
