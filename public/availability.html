@@ -47,8 +47,48 @@
             <div class="col-1"></div>
 
             <div class="col-10 formStyle">
-                <p>Things will be here.</p>
+                <form>
+                    <h4>Event</h4>
+                    <hr>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for "summary">Summary</label>
+                            <input type="text" class="form-control" id="summary" placeholder="summary" disabled>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for "location">location</label>
+                            <input type="text" class="form-control" id="location" placeholder="location" disabled>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for "discription">discription</label>
+                            <input type="text" class="form-control" id="discription" placeholder="discription" style="height: 80px">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for "start">Start</label>
+                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="datetime">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for "start">End</label>
+                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="datetime" disabled>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="recurrence" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Recurrence
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">1</a>
+                                <a class="dropdown-item" href="#">2</a>
+                            </div>
+                            </div>
+                        <div class="form-group col-md-12">
+                            <label for "attendees">attendees</label>
+                            <input type="text" class="form-control" id="email" placeholder="test@email.com, test2@email.com" disabled>
+                        </div>
+                    </div>
+                </form>
+
             </div>
+
 
             <div class="col-1"></div>
 
