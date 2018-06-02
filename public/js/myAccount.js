@@ -72,12 +72,12 @@ $(function() {
 
         // Fucked ajax call 
 
-        // $.get("/api/vendor", {
-        //     type: "POST",
-        //     data: user
-        // }).then( () => {
-        //     console.log("User in the DB: " + user)
-        // })
+        $.get("/api/vendor", {
+            type: "POST",
+            data: user
+        }).then( () => {
+            console.log("User in the DB: " + user)
+        })
 
         // Disable fields 
         $(".personalInput").attr("disabled", "disabled");
