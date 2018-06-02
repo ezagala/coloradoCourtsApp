@@ -4,7 +4,7 @@
 $(function() {
 
     // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
-    // $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip()
 
 
     // Button click targeting the edit button that enables personal info fields
@@ -61,7 +61,6 @@ $(function() {
             console.log("User in the DB: " + user)
         })
 
-
     });
 
     //Button click targeting the edit button enables languages boxes
@@ -80,12 +79,9 @@ $(function() {
         // Check to see that object was built correctly
         console.log("The new user is: " + JSON.stringify(user)); 
 
-        
-
     })
 
     //Button click targeting the edit button enables certificate boxes
-
     $("#certificateEdit").on("click", event => {
         event.preventDefault(); 
 
