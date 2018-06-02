@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Availability</title>
-    <title>Account Registration</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/availability.css">
@@ -26,7 +25,7 @@
                 </button>
             </a>
 
-            <a href="#" id="signOut">
+            <a href="/" id="signOut">
                 <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Sign out">
                     <img src="./assets/signOut.png" width="30" height="30" alt="Sign out icon">
                 </button>
@@ -48,41 +47,64 @@
 
             <div class="col-10 formStyle">
                 <form>
-                    <h4>Event</h4>
+                    <h4>Time Slot</h4>
                     <hr>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for "summary">Summary</label>
-                            <input type="text" class="form-control" id="summary" placeholder="summary" disabled>
+                            <label for "location">Location:</label>
+                            <!-- <input type="text" class="form-control" id="location" placeholder="location" disabled> -->
+                            <select id="place" class="form-control personalInput">
+                                <option selected>Choose...</option>
+                                <option>Courthouse One</option>
+                                <option>Courthouse Two</option>
+                                <option>Courthouse Three</option>
+                                <option>Courthouse Four</option>
+                                <option>Courthouse Five</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for "location">location</label>
-                            <input type="text" class="form-control" id="location" placeholder="location" disabled>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for "discription">discription</label>
-                            <input type="text" class="form-control" id="discription" placeholder="discription" style="height: 80px">
+                            <label for "discription">Notes:</label>
+                            <input type="text" class="form-control" id="Notes" placeholder="Please enter any relevant information about your availability here."
+                                style="height: 60px">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for "start">Start</label>
+                            <label for "start">Start:</label>
                             <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="datetime">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for "start">End</label>
-                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="datetime" disabled>
+                            <label for "start">End:</label>
+                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="datetime">
                         </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="recurrence" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Recurrence
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">1</a>
-                                <a class="dropdown-item" href="#">2</a>
-                            </div>
-                            </div>
                         <div class="form-group col-md-12">
-                            <label for "attendees">attendees</label>
-                            <input type="text" class="form-control" id="email" placeholder="test@email.com, test2@email.com" disabled>
+                            <label for "location">Recurrence:</label>
+                            <select id="place" class="form-control personalInput">
+                                <option selected>Choose...</option>
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#personalModal" id="savePersonal">Create Time Slot!</button>
+
+                    <!-- Personal Info Modal -->
+                    <div class="modal fade" id="personalModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">One moment!</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to update your availability?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" id="personalYes" data-dismiss="modal">Yes!</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No.</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
