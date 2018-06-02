@@ -1,10 +1,10 @@
 // IIFE to execute code immediately upon page load 
 // All code should be added inside this scope unless it *should not* be executed immediately
+// This thing is currently f$%king my ajax calls and I have no idea why 
 $(function() {
 
     // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
     $('[data-toggle="tooltip"]').tooltip()
-
 
 
     // Button click targeting the edit button that enables personal info fields
@@ -54,23 +54,12 @@ $(function() {
 
          console.log("The new user is: " + user); 
 
-        //  // Make ajax call 
-        //  $.ajax({
-        //     type: "PUT",
-        //     url: "/api/vendor",
-        //     data: user, 
-        // }).then( () => {
-        //     // Confirm that newUser was posted
-        //     console.log("Posted new user: " + user)  
-        // })
-
-        $.ajax("api/vendor", {
+        $.ajax("/api/vendor", {
             type: "PUT",
             data: user
         }).then( () => {
             console.log("User in the DB: " + user)
         })
-
 
     });
 
@@ -90,12 +79,9 @@ $(function() {
         // Check to see that object was built correctly
         console.log("The new user is: " + JSON.stringify(user)); 
 
-        
-
     })
 
     //Button click targeting the edit button enables certificate boxes
-
     $("#certificateEdit").on("click", event => {
         event.preventDefault(); 
 

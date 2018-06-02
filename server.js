@@ -3,8 +3,8 @@ const bodyParser = require("body-parser")
 const session = require("express-session")
 const logger = require("morgan")
 const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const keys = require("./config/keys")
+// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// const keys = require("./config/keys")
 // LocalStrategy = require('passport-local').Strategy;
 
 
@@ -49,20 +49,20 @@ const user = {
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
 //   profile), and invoke a callback with a user object.
-passport.use(new GoogleStrategy({
-  clientID: keys.google.clientID,
-  clientSecret: keys.google.clientSecret,
-  callbackURL: "/auth/google/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-    //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //    return done(err, user);
-    //  });
-    console.log(profile)
+// passport.use(new GoogleStrategy({
+//   clientID: keys.google.clientID,
+//   clientSecret: keys.google.clientSecret,
+//   callbackURL: "/auth/google/callback"
+// },
+// function(accessToken, refreshToken, profile, done) {
+//     //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//     //    return done(err, user);
+//     //  });
+//     console.log(profile)
 
-    return done(null, user)
-}
-));
+//     return done(null, user)
+// }
+// ));
 
 
 
@@ -95,16 +95,16 @@ function(accessToken, refreshToken, profile, done) {
 //   }
 // ));
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
+// passport.serializeUser(function(user, done) {
+//     done(null, user.id);
+//   });
   
-passport.deserializeUser(function(id, done) {
-    // User.findById(id, function(err, user) {
-      done( null, user);
-      // done( err, user); this is the original
-    // });
-  });
+// passport.deserializeUser(function(id, done) {
+//     // User.findById(id, function(err, user) {
+//       done( null, user);
+//       // done( err, user); this is the original
+//     // });
+//   });
 
 // Whit had the port commented out 
 // app.listen(PORT)
