@@ -1,3 +1,18 @@
+// This will populate the fields with the user's information. (Still need to add some conditional logic)
+$.get("/api/vendor", function(data, status) {
+    console.log(data);
+    vendor = data[0]; 
+    $("#firstName").attr("placeholder", vendor.firstName);
+    $("#lastName").attr("placeholder", vendor.lastName); 
+    $("#email").attr("placeholder", vendor.email);
+    $("#phone").attr("placeholder", vendor.phone);
+    $("#address").attr("placeholder", vendor.address);
+    $("#city").attr("placeholder", vendor.city);
+    $("#state").find("option").empty().attr("selected", "selected").append(vendor.state); 
+    $("#zip").attr("placeholder", vendor.zip);
+    $("#rates").attr("placeholder", vendor.rate);
+})
+
 // IIFE to execute code immediately upon page load 
 // All code should be added inside this scope unless it *should not* be executed immediately
 // This thing is currently f$%king my ajax calls and I have no idea why 
@@ -6,8 +21,7 @@ $(function() {
     // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
     $('[data-toggle="tooltip"]').tooltip()
 
-
-    // Button click targeting the edit button that enables personal info fields
+    // Listener targeting the edit button that enables/disables personal info fields
     $("#personalEdit").on("click", event => {
         event.preventDefault();
 
@@ -21,7 +35,7 @@ $(function() {
         }
     });
 
-    // Button click targeting the edit button that enables rate field 
+    // Listener targeting the edit button that enables/disables rate field 
     $("#vendorEdit").on("click", event => {
         event.preventDefault(); 
 
@@ -36,7 +50,7 @@ $(function() {
     })
     
 
-
+    // Listener that captures data and hits the api route 
     $("#personalYes").on("click", function(event) {
 
         event.preventDefault();
@@ -56,68 +70,59 @@ $(function() {
 
          console.log("The new user is: " + user); 
 
-        $.ajax("/api/vendor", {
-            type: "POST",
-            data: user
-        }).then( () => {
-            console.log("User in the DB: " + user)
-        })
+        // Fucked ajax call 
 
-    });
+        // $.get("/api/vendor", {
+        //     type: "POST",
+        //     data: user
+        // }).then( () => {
+        //     console.log("User in the DB: " + user)
+        // })
 
-    //Button click targeting the edit button enables languages boxes
-    $("#languageEdit").on("click", event => {
-        event.preventDefault(); 
-
-        let attr = $(".language").attr("disabled");
-            
-        if (attr === "disabled") {
-         $(".language").removeAttr("disabled");
-         attr = undefined; 
-        } else if (attr === undefined){
-            $(".language").attr("disabled", "disabled");
-        }
-
-        // Check to see that object was built correctly
-        console.log("The new user is: " + JSON.stringify(user)); 
-
-    })
-
-    //Button click targeting the edit button enables certificate boxes
-    $("#certificateEdit").on("click", event => {
-        event.preventDefault(); 
-
-        let attr = $(".cert").attr("disabled");
-            
-        if (attr === "disabled") {
-         $(".cert").removeAttr("disabled");
-         attr = undefined; 
-        } else if (attr === undefined){
-            $(".cert").attr("disabled", "disabled");
-        }
+        // Disable fields 
+        $(".personalInput").attr("disabled", "disabled");
+        
     });
 
     $("#vendorYes").on("click", function (event) {
 
         event.preventDefault();
 
-        console.log("this input was: " + $("#english").val())
+        const languages = []; 
+
+       $(".language").each(function (index) {
+            if ($(this).is(":checked")){
+                languages.push($(this).attr("value")); 
+            }
+        }); 
+
+        const certs = []; 
+
+       $(".cert").each(function (index) {
+            if ($(this).is(":checked")){
+                certs.push($(this).attr("value")); 
+            }
+        }); 
 
          // Capture vales and build obejct to pass into ajax call
          const user = {
             rate: $("#rates").val().trim(), 
-            languages: $("#lastName").val(), 
-            certificates: $("#phone").val(),
+            languages: languages.join(", "), 
+            certificates: certs.join(", "),
          }
 
-         console.log("The new user is: " + user); 
+         console.log("The new user is: " + JSON.stringify(user)); 
 
-        $.ajax("/api/vendor", {
-            type: "PUT",
-            data: user
-        }).then( () => {
-            console.log("User in the DB: " + user)
-        })
+        // $.ajax("/api/vendor", {
+        //     type: "PUT",
+        //     data: user
+        // }).then( () => {
+        //     console.log("User in the DB: " + user)
+        // })
+
+        // Disable fields after user selects "yes"
+        $(".rateInput").attr("disabled", "disabled");
+        
 
     });
 
