@@ -10,8 +10,8 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./css/myAcount.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="js/myAccount.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/myAccount.js"></script>  
 </head>
 
 <body>
@@ -20,9 +20,9 @@
 
     <nav class="navbar">
 
-      <a href="#" id="calendar">
+      <a href="/availability" id="calendar">
         <button type="button" class="btn btn-outline-dark" data-toggle="tooltip" data-placement="bottom" title="Availability">
-          <img src="../public/assets/calendar.png" width="30" height="30" alt="Calendar icon">
+          <img src="./assets/calendar.png" width="30" height="30" alt="Calendar icon">
 
         </button>
       </a>
@@ -106,11 +106,11 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-secondary" id="personalEdit">Edit</button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitModal" id=savePiButton>Save</button>
+          <button class="btn btn-secondary btn-block" id="personalEdit">Edit</button>
+          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#personalModal" id="savePersonal">Save</button>
 
-          <!-- Modal -->
-          <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+          <!-- Personal Info Modal -->
+          <div class="modal fade" id="personalModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -120,10 +120,10 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  Are you sure you want to change your account info?
+                  Are you sure you want to change your personal information?
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-success" id="yes" data-dismiss="modal">Yes!</button>
+                  <button type="button" class="btn btn-success" id="personalYes" data-dismiss="modal">Yes!</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">No.</button>
                 </div>
               </div>
@@ -147,10 +147,7 @@
           <div class="form-row">
             <div class="form-group col">
               <label for="rates">Rate per hour:</label>
-              <input type="text" class="form-control" id="rates" placeholder="E.g. $20.25" disabled>
-              <br>
-              <button type="button" class="btn btn-secondary" id="rateEdit">Edit</button>
-              <button type="button" class="btn btn-primary" id="saveRateButton">Save</button>
+              <input type="text" class="form-control rateInput" id="rates" placeholder="E.g. $20.25" disabled>
             </div>
           </div>
 
@@ -159,49 +156,49 @@
               <label for="languages">Languages:</label>
               <hr>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="English" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="English" disabled>
                 <label class="form-check-label" for="English" disabled>
                   English
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="Spanish" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="Spanish" disabled>
                 <label class="form-check-label" for="Spanish">
                   Spanish
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="Vietnamese" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="Vietnamese" disabled>
                 <label class="form-check-label" for="Vietnamese">
                   Vietnamese
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="African" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="African" disabled>
                 <label class="form-check-label" for="African">
                   African*
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="German" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="German" disabled>
                 <label class="form-check-label" for="German">
                   German
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="Navajo" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="Navajo" disabled>
                 <label class="form-check-label" for="Navajo">
                   Navajo
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="Swedish" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="Swedish" disabled>
                 <label class="form-check-label" for="Swedish">
                   Swedish
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input language" type="checkbox" value="" id="Hindi" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="Hindi" disabled>
                 <label class="form-check-label" for="Hindi">
                   Hindi
                 </label>
@@ -209,46 +206,66 @@
               <p>
                 <small>*Amharic, Ibo, Twi, Yoruba, Bantu, Swahili, Somali</small>
               </p>
-              <button type="button" class="btn btn-secondary" id="languageEdit">Edit</button>
-              <button type="button" class="btn btn-primary">Add</button>
             </div>
 
             <div class="form-group col-md-6 col-sm">
               <label for="certificates">Certificates:</label>
               <hr>
               <div class="form-check">
-                <input class="form-check-input cert" type="checkbox" value="" id="certificateOne" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="certificateOne" disabled>
                 <label class="form-check-label" for="certificateOne">
                   Certificate One
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input cert" type="checkbox" value="" id="certificateTwo" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="certificateTwo" disabled>
                 <label class="form-check-label" for="certificateTwo">
                   Certificate Two
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input cert" type="checkbox" value="" id="certificateThree" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="certificateThree" disabled>
                 <label class="form-check-label" for="certificateThree">
                   Certificate Three
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input cert" type="checkbox" value="" id="certificateFour" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="certificateFour" disabled>
                 <label class="form-check-label" for="certificateFour">
                   Certificate Four
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input cert" type="checkbox" value="" id="certificateFive" disabled>
+                <input class="form-check-input rateInput" type="checkbox" value="" id="certificateFive" disabled>
                 <label class="form-check-label" for="certificateFive">
                   Certificate Five
                 </label>
               </div>
               <br>
-              <button type="button" class="btn btn-secondary" id="certificateEdit">Edit</button>
-              <button type="button" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+          <!-- Buttons here -->
+          <button class="btn btn-secondary btn-block" id="vendorEdit">Edit</button>
+          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#vendorModal" id=saveVendorButton>Save</button>
+
+          <!-- Vendor Info Modal -->
+          <div class="modal fade" id="vendorModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">One moment!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to change your vendor information?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" id="vendorYes" data-dismiss="modal">Yes!</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">No.</button>
+                </div>
+              </div>
             </div>
           </div>
         </form>

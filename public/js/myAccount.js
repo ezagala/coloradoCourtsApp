@@ -1,13 +1,15 @@
 // IIFE to execute code immediately upon page load 
 // All code should be added inside this scope unless it *should not* be executed immediately
-$(function () {
+$(function() {
 
     // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
     $('[data-toggle="tooltip"]').tooltip()
 
+
+
     // Button click targeting the edit button that enables personal info fields
     $("#personalEdit").on("click", event => {
-        event.preventDefault(); 
+        event.preventDefault();
 
         let attr = $(".personalInput").attr("disabled");
             
@@ -20,20 +22,20 @@ $(function () {
     });
 
     // Button click targeting the edit button that enables rate field 
-    $("#rateEdit").on("click", event => {
+    $("#vendorEdit").on("click", event => {
         event.preventDefault(); 
 
-        let attr = $("#rates").attr("disabled");
+        let attr = $(".rateInput").attr("disabled");
             
         if (attr === "disabled") {
-         $("#rates").removeAttr("disabled");
+         $(".rateInput").removeAttr("disabled");
          attr = undefined; 
         } else if (attr === undefined){
-            $("#rates").attr("disabled", "disabled");
+            $(".rateInput").attr("disabled", "disabled");
         }
     })
     
-    $("#yes").on("click", event => {
+    $("#personalYes").on("click", function (event) {
 
         event.preventDefault();
 
@@ -49,6 +51,26 @@ $(function () {
             email: $("#email").val().trim(), 
             password: $("#password").val().trim()
          }
+
+         console.log("The new user is: " + user); 
+
+        //  // Make ajax call 
+        //  $.ajax({
+        //     type: "PUT",
+        //     url: "/api/vendor",
+        //     data: user, 
+        // }).then( () => {
+        //     // Confirm that newUser was posted
+        //     console.log("Posted new user: " + user)  
+        // })
+
+        $.ajax("api/vendor", {
+            type: "PUT",
+            data: user
+        }).then( () => {
+            console.log("User in the DB: " + user)
+        })
+
 
     });
 
@@ -68,15 +90,7 @@ $(function () {
         // Check to see that object was built correctly
         console.log("The new user is: " + JSON.stringify(user)); 
 
-        // Make ajax call 
-         $.ajax({
-            method: "PUT",
-            url: "/api/vendor",
-            data: user, 
-        }).then( () => {
-            // Confirm that newUser was posted
-            console.log("Posted new user: " + user)  
-        })
+        
 
     })
 
@@ -95,4 +109,4 @@ $(function () {
         }
     });
 
-  });
+})
