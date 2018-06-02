@@ -3,9 +3,7 @@ const bodyParser = require("body-parser")
 const session = require("express-session")
 const logger = require("morgan")
 const passport = require('passport')
-// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// const keys = require("./config/keys")
-// LocalStrategy = require('passport-local').Strategy;
+LocalStrategy = require('passport-local').Strategy;
 
 
 const app = express()
@@ -39,84 +37,51 @@ require("./controllers/html-routes.js")(app);
 
 
 const user = {
-    name: "bob",
+    name: "ejzagala@gmail.com",
     password: "password",
     id: 1
 }
 
 
-// Use the GoogleStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Google
-//   profile), and invoke a callback with a user object.
-// passport.use(new GoogleStrategy({
-//   clientID: keys.google.clientID,
-//   clientSecret: keys.google.clientSecret,
-//   callbackURL: "/auth/google/callback"
-// },
-// function(accessToken, refreshToken, profile, done) {
-//     //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//     //    return done(err, user);
-//     //  });
-//     console.log(profile)
-
-//     return done(null, user)
-// }
-// ));
-
-
-
-
 // defining  local authentication strategy 
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     // USER IS A MODEL NEED TO UPDATE
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    // USER IS A MODEL NEED TO UPDATE
     
-//     if (!username === user.name){
-//         return done(null, false, { message: "incorrect username"})
-//     } 
-//     if (!password === user.password){
-//         console.log(password, user.password)
-//         return done(null, false, { message: "incorrect password"})
-//     }
-//     return done(null, user)
-    
-    
-    // User.findOne({ username: username }, function (err, user) {
-    //   if (err) { return done(err); }
-    //   if (!user) {
-    //     return done(null, false, { message: 'Incorrect username.' });
-    //   }
-    //   if (!user.validPassword(password)) {
-    //     return done(null, false, { message: 'Incorrect password.' });
-    //   }
-    //   return done(null, user);
-    // });
-//   }
-// ));
+    if (!username === user.name){
+        return done(null, false, { message: "incorrect username"})
+    } 
+    if (!password === user.password){
+        console.log(password, user.password)
+        return done(null, false, { message: "incorrect password"})
+    }
 
-// passport.serializeUser(function(user, done) {
-//     done(null, user.id);
-//   });
+    return done(null, user)
   
-// passport.deserializeUser(function(id, done) {
-//     // User.findById(id, function(err, user) {
-//       done( null, user);
-//       // done( err, user); this is the original
-//     // });
-//   });
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
-// Whit had the port commented out 
-// app.listen(PORT)
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+passport.deserializeUser(function(id, done) {
+    // User.findById(id, function(err, user) {
+      done( null, user);
+      // done( err, user); this is the original
+    // });
+  });
 
-// Lines 113 through 119 were deleted from whit's file 
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
-//db.sequelize.sync({ force: true }).then(function() {
-  //app.listen(PORT, function() {
-   // console.log("App listening on PORT " + PORT);
- // });
-//});
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

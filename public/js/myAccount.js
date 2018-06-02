@@ -35,7 +35,9 @@ $(function() {
         }
     })
     
-    $("#personalYes").on("click", function (event) {
+
+
+    $("#personalYes").on("click", function(event) {
 
         event.preventDefault();
 
@@ -55,7 +57,7 @@ $(function() {
          console.log("The new user is: " + user); 
 
         $.ajax("/api/vendor", {
-            type: "PUT",
+            type: "POST",
             data: user
         }).then( () => {
             console.log("User in the DB: " + user)
@@ -95,4 +97,31 @@ $(function() {
         }
     });
 
+    $("#vendorYes").on("click", function (event) {
+
+        event.preventDefault();
+
+        console.log("this input was: " + $("#english").val())
+
+         // Capture vales and build obejct to pass into ajax call
+         const user = {
+            rate: $("#rates").val().trim(), 
+            languages: $("#lastName").val(), 
+            certificates: $("#phone").val(),
+         }
+
+         console.log("The new user is: " + user); 
+
+        $.ajax("/api/vendor", {
+            type: "PUT",
+            data: user
+        }).then( () => {
+            console.log("User in the DB: " + user)
+        })
+
+    });
+
 })
+
+
+
