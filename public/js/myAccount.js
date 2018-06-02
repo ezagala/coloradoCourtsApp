@@ -71,6 +71,7 @@ $(function() {
             console.log("User in the DB: " + user)
         })
 
+
     });
 
     //Button click targeting the edit button enables languages boxes

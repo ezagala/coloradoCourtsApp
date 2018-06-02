@@ -11,7 +11,7 @@ const isAuthenticated = (request, response, next) => {
       return next()
   }
 }
-const app = express();
+// const app = express();
 
 // Routes
 // =============================================================
@@ -40,6 +40,23 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/availability.html"));
   })
 
+
+
+// // passport authentication with google
+// app.get('/auth/google',
+// passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login',"https://www.googleapis.com/auth/calendar"]}));
+// // GET /auth/google/callback
+// //   Use passport.authenticate() as route middleware to authenticate the
+// //   request.  If authentication fails, the user will be redirected back to the
+// //   login page.  Otherwise, the primary route function function will be called,
+// //   which, in this example, will redirect the user to the home page.
+// app.get('/auth/google/callback', 
+//   passport.authenticate('google', { failureRedirect: '/' }),
+//   function(req, res) {
+//     res.redirect('/account');
+//   });
+
+//   // Local passport authentication
   // app.post('/login',
   //   passport.authenticate('local', {
   //     successRedirect: '/account',
@@ -50,5 +67,6 @@ module.exports = function(app) {
   //   //   console.log("redirect")
   //   //   res.redirect("/")
   //   // }
+
   // );
 };
