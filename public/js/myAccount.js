@@ -1,3 +1,17 @@
+// This will populate the fields with the user's information. (Still need to add some conditional logic)
+$.get("/api/vendor", function(data, status) {
+    console.log(data);
+    vendor = data[0]; 
+    $("#firstName").attr("placeholder", vendor.firstName);
+    $("#lastName").attr("placeholder", vendor.lastName); 
+    $("#email").attr("placeholder", vendor.email);
+    $("#phone").attr("placeholder", vendor.phone);
+    $("#address").attr("placeholder", vendor.address);
+    $("#city").attr("placeholder", vendor.city);
+    $("#state").attr("placeholder", vendor.state);
+    $("#zip").attr("placeholder", vendor.zip);
+})
+
 // IIFE to execute code immediately upon page load 
 // All code should be added inside this scope unless it *should not* be executed immediately
 // This thing is currently f$%king my ajax calls and I have no idea why 
@@ -5,7 +19,6 @@ $(function() {
 
     // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
     $('[data-toggle="tooltip"]').tooltip()
-
 
     // Button click targeting the edit button that enables personal info fields
     $("#personalEdit").on("click", event => {
@@ -56,12 +69,14 @@ $(function() {
 
          console.log("The new user is: " + user); 
 
-        $.ajax("/api/vendor", {
-            type: "POST",
-            data: user
-        }).then( () => {
-            console.log("User in the DB: " + user)
-        })
+        // Fucked ajax call 
+
+        // $.ajax("/api/vendor", {
+        //     type: "POST",
+        //     data: user
+        // }).then( () => {
+        //     console.log("User in the DB: " + user)
+        // })
 
     });
 
@@ -101,23 +116,37 @@ $(function() {
 
         event.preventDefault();
 
-        console.log("this input was: " + $("#english").val())
+        const languages = []; 
+
+       $(".language").each(function (index) {
+            if ($(this).is(":checked")){
+                languages.push($(this).attr("value")); 
+            }
+        }); 
+
+        const certs = []; 
+
+       $(".cert").each(function (index) {
+            if ($(this).is(":checked")){
+                certs.push($(this).attr("value")); 
+            }
+        }); 
 
          // Capture vales and build obejct to pass into ajax call
          const user = {
             rate: $("#rates").val().trim(), 
-            languages: $("#lastName").val(), 
-            certificates: $("#phone").val(),
+            languages: languages.join(", "), 
+            certificates: certs.join(", "),
          }
 
-         console.log("The new user is: " + user); 
+         console.log("The new user is: " + JSON.stringify(user)); 
 
-        $.ajax("/api/vendor", {
-            type: "PUT",
-            data: user
-        }).then( () => {
-            console.log("User in the DB: " + user)
-        })
+        // $.ajax("/api/vendor", {
+        //     type: "PUT",
+        //     data: user
+        // }).then( () => {
+        //     console.log("User in the DB: " + user)
+        // })
 
     });
 
