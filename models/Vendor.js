@@ -4,13 +4,16 @@ module.exports = function(sequelize, DataTypes) {
     vendorId: DataTypes.INTEGER,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    phone_num: DataTypes.STRING,
+    phone: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    zip_code: DataTypes.STRING,
+    zip: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
+    rate: DataTypes.STRING,
+    languages: DataTypes.STRING,
+    certificates: DataTypes.STRING,
     approved: DataTypes.BOOLEAN,
   });
 

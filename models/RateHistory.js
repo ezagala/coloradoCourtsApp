@@ -1,19 +1,19 @@
 module.exports = function(sequelize, DataTypes) {
-  var Courthouse = sequelize.define("Courthouse", {
-    courthouse_id: {
+  var RateHistory = sequelize.define("RateHistory", {
+    vendor_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    name: {
-      type: DataTypes.STRING,
+    rate: {
+      type: DataTypes.INTEGER,
     },
-    address: {
+    date: {
       type: DataTypes.TEXT,
     },
   });
 
-  return Courthouse;
+  return RateHistory;
 };

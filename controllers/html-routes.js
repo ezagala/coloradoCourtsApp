@@ -11,7 +11,7 @@ const isAuthenticated = (request, response, next) => {
       return next()
   }
 }
-const app = express();
+// const app = express();
 
 // Routes
 // =============================================================
@@ -30,24 +30,26 @@ module.exports = function(app) {
   })
 
   // myaccount route loads myaccount.html
-  app.get("/account", isAuthenticated, function (req, res) {
+  // isAuthenticated argument removed for testing purposess
+  app.get("/account", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/myaccount.html"));
   })
 
   // calendar route loads calendar.html
-  app.get("/calendar", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/calendar.html"));
+  app.get("/availability", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/availability.html"));
   })
 
+ // Local passport authentication
   app.post('/login',
     passport.authenticate('local', {
       successRedirect: '/account',
       failureRedirect: '/',
-      // failureFlash: true
-    })
-    // function(req,res){
-    //   console.log("redirect")
-    //   res.redirect("/")
-    // }
+    }),
+    function(req,res){
+      console.log("redirect")
+      res.redirect("/")
+    }
   );
+  
 };
