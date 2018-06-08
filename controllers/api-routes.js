@@ -70,11 +70,12 @@ module.exports = function (app) {
                                    failureFlash: true })
   );
 
-  // Add a member
+  // Add a vendor 
   app.post("/signup", function(req, res) {
 
     console.log('req.body', req.body);
     
+    // Encrypt the password 
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     console.log('hash', hash);
 
