@@ -78,21 +78,10 @@ module.exports = function (app) {
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     console.log('hash', hash);
 
-    db.Vendor.create({
-      vendorId: req.body.vendorId,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      phone: req.body.phone,
-      address: req.body.address,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
+    db.User.create({
       email: req.body.email,
-      password: hash,
-      rate: req.body.rate,
-      languages: req.body.languages,
-      certificates: req.body.certificates,
-      approved: req.body.approved
+      username: req.body.username,
+      password: hash
     }).done(function(m) {
       res.send(req.body.email)
     });
