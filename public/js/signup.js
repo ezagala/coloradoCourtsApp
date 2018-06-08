@@ -8,8 +8,6 @@ console.log("I'm here");
 
         event.preventDefault();
 
-        console.log("I'm here again")
-
         // Capture vales and build obejct to pass into ajax call
         const user = {
             firstName: $("#firstName").val().trim(), 
@@ -24,18 +22,9 @@ console.log("I'm here");
         }
 
         // Check to see that object was built correctly
-        console.log("The new user is: " + JSON.stringify(user)); 
-        
-        // Make ajax call 
-        /*$.ajax({
-            method: "POST",
-            url: "/api/vendor", // TODO: uncomment after testing
-            data: JSON.stringify(user), 
-        }).then(() => {
-            // Confirm that newUser was posted
-            console.log("Posted new user: " + user)  
-        });*/
+        console.log("The new user is: " + JSON.stringify(user));    
 
+        // ajax call to post user
         $.post('/signup', user, function(user) {
           console.log('New user', user);
         });
