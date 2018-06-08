@@ -24,6 +24,8 @@ app.use(express.static("public"))
 // configure logger 
 app.use(logger("dev"))
 
+// error-handling
+
 // Requiring our models for syncing
 var db = require("./models");
 
