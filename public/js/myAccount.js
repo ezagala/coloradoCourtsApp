@@ -1,4 +1,3 @@
-
 // IIFE to execute code immediately upon page load 
 // All code should be added inside this scope unless it *should not* be executed immediately
 // This thing is currently f$%king my ajax calls and I have no idea why 
