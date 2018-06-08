@@ -43,6 +43,36 @@ const user = {
     id: 1
 }
 
+// defining  local authentication strategy 
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+  
+    Vendor.findOne({ email: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+
+));
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+passport.deserializeUser(function(id, done) {
+    // User.findById(id, function(err, user) {
+      done( null, user);
+      // done( err, user); this is the original
+    // });
+  });
+
+
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({ force: true }).then(function() {
