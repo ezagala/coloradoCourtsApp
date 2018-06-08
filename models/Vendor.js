@@ -2,15 +2,39 @@ module.exports = function(sequelize, DataTypes) {
   var Vendor = sequelize.define("Vendor", {
     // Giving the Vendor model a name of type STRING
     vendorId: DataTypes.INTEGER,
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+      len: [1]
+    }
+  },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+      len: [1]
+    }
+  },
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     zip: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+      len: [1]
+    }
+  },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+      len: [1]
+    }
+  },
     rate: DataTypes.STRING,
     languages: DataTypes.STRING,
     certificates: DataTypes.STRING,
