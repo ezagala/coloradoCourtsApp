@@ -1,3 +1,5 @@
+var bcrypt = require("bcrypt-nodejs");
+
 module.exports = function(sequelize, DataTypes) {
   var Vendor = sequelize.define("Vendor", {
     // Giving the Vendor model a name of type STRING
@@ -47,6 +49,16 @@ module.exports = function(sequelize, DataTypes) {
     Vendor.hasMany(models.VendorAvailability, {
       onDelete: "cascade",
     });
+  };
+
+  // Syncs with DB
+  Vendor.sync();
+
+  // Creating a custom method for our Member model. 
+  //This will check if an unhashed password entered by the 
+  //user can be compared to the hashed password stored in our database
+  Vendor.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
   };
 
   return Vendor;
