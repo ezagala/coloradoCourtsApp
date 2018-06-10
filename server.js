@@ -39,6 +39,7 @@ var db = require("./models");
 require("./controllers/api-routes.js")(app, passport);
 require("./controllers/html-routes.js")(app);
 
+
 // configure logger 
 // app.use(logger("dev"))
 
@@ -47,6 +48,7 @@ const user = {
     password: "password",
     id: 1
 }
+
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
