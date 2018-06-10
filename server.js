@@ -39,6 +39,7 @@ var db = require("./models");
 require("./controllers/api-routes.js")(app, passport);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 require("./controllers/html-routes.js")(app, passport);
 =======
 require("./controllers/html-routes.js")(app);
@@ -47,6 +48,11 @@ require("./controllers/html-routes.js")(app);
 require("./controllers/html-routes.js")(app);
 
 >>>>>>> test
+=======
+require("./controllers/html-routes.js")(app);
+
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
 
 // configure logger 
 // app.use(logger("dev"))

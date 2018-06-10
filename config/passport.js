@@ -8,20 +8,23 @@ const LocalStrategy = require('passport-local').Strategy;
 // load up the user model
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 var User = require('../models/Vendor');
 =======
 var Vendor = require('../models/Vendor');
 >>>>>>> test
+=======
+var Vendor = require('../models/Vendor');
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
 
-=======
 var Vendor = require('../models/Vendor');
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
->>>>>>> test
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -30,6 +33,7 @@ module.exports = function (passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function (user, done) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         done(null, user.id);
@@ -42,10 +46,16 @@ module.exports = function (passport) {
         done(null, user);
 
 >>>>>>> test
+=======
+        console.log('serializeUser');
+        done(null, user);
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         User.findById(id, function (err, user) {
@@ -58,6 +68,11 @@ module.exports = function (passport) {
         Vendor.findById(id, function (err, user) {
 
 >>>>>>> test
+=======
+        console.log('deserializeUser');
+        Vendor.findById(id, function (err, user) {
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
             done(err, user);
         });
         //done(null, user);
@@ -69,6 +84,7 @@ module.exports = function (passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     passport.use('local-signup', new LocalStrategy({
@@ -94,6 +110,8 @@ module.exports = function (passport) {
             // Vendor.findOne wont fire unless data is sent back
 >>>>>>> test
 =======
+=======
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
         /* passport.use('local-signup', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
             usernameField: 'email',
@@ -105,23 +123,34 @@ module.exports = function (passport) {
             // asynchronous
             // Vendor.findOne wont fire unless data is sent back
 
+<<<<<<< HEAD
 >>>>>>> test
+=======
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
             process.nextTick(function () {
                 console.log('hi 2');
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 //User.findOne({ where: { username: username } }, function(err, user) 
                 Vendor.findOne({ where: { email: email } }, function (err, user) {
 =======
+=======
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
                 //Vendor.findOne({ where: { username: username } }, function(err, user) 
                 Vendor.findOne({
                     where: {
                         email: email
                     }
                 }, function (err, user) {
+<<<<<<< HEAD
 >>>>>>> test
+=======
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
@@ -145,8 +174,14 @@ module.exports = function (passport) {
                             if (err)
                                 throw err;
 <<<<<<< HEAD
+<<<<<<< HEAD
                             return done(null, newUser);
 =======
+=======
+                            return done(null, newVendor);
+
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
                 //Vendor.findOne({ where: { username: username } }, function(err, user) 
                 Vendor.findOne({
                     where: {
@@ -176,11 +211,15 @@ module.exports = function (passport) {
                             if (err)
                                 throw err;
                             return done(null, newVendor);
+<<<<<<< HEAD
 >>>>>>> test
 =======
                             return done(null, newVendor);
 
 >>>>>>> test
+=======
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
                         });
                     }
 
@@ -190,7 +229,10 @@ module.exports = function (passport) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
         }));*/
 
         passport.use(new LocalStrategy(
@@ -227,7 +269,11 @@ module.exports = function (passport) {
               });
             }
           ));
+<<<<<<< HEAD
 >>>>>>> test
+=======
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
         }));
 
     // =========================================================================
@@ -268,7 +314,12 @@ module.exports = function (passport) {
 
         }));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+        */
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
         }));*/
 
         passport.use(new LocalStrategy(
@@ -305,10 +356,14 @@ module.exports = function (passport) {
               });
             }
           ));
+<<<<<<< HEAD
 >>>>>>> test
 =======
         */
 >>>>>>> test
+=======
+
+>>>>>>> 7440ad571d2cebbd6ccf483b01ba500aa6d17c70
 
           console.log('created new local strategy');
 };
