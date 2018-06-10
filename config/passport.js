@@ -1,14 +1,23 @@
+var db = require("../models");
+
 // set up according to https://scotch.io/tutorials/easy-node-authentication-setup-and-local
 
 // load all the things we need
-var LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 
 // load up the user model
+<<<<<<< HEAD
 var User = require('../models/Vendor');
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
 
+=======
+var Vendor = require('../models/Vendor');
+
+// expose this function to our app using module.exports
+module.exports = function (passport) {
+>>>>>>> test
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -17,14 +26,25 @@ module.exports = function (passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function (user, done) {
+<<<<<<< HEAD
         done(null, user.id);
+=======
+        console.log('serializeUser');
+        done(null, user);
+>>>>>>> test
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
+<<<<<<< HEAD
         User.findById(id, function (err, user) {
+=======
+        console.log('deserializeUser');
+        Vendor.findById(id, function (err, user) {
+>>>>>>> test
             done(err, user);
         });
+        //done(null, user);
     });
 
     // =========================================================================
@@ -33,6 +53,7 @@ module.exports = function (passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
+<<<<<<< HEAD
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField: 'email',
@@ -43,10 +64,23 @@ module.exports = function (passport) {
             console.log('hi 1');
             // asynchronous
             // User.findOne wont fire unless data is sent back
+=======
+        /*passport.use('local-signup', new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
+        },
+        function (req, email, password, done) {
+            console.log('hi 1');
+            // asynchronous
+            // Vendor.findOne wont fire unless data is sent back
+>>>>>>> test
             process.nextTick(function () {
                 console.log('hi 2');
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
+<<<<<<< HEAD
                 //User.findOne({ where: { username: username } }, function(err, user) 
                 Vendor.findOne({ where: { email: email } }, function (err, user) {
                     // if there are any errors, return the error
@@ -74,6 +108,37 @@ module.exports = function (passport) {
                             if (err)
                                 throw err;
                             return done(null, newUser);
+=======
+                //Vendor.findOne({ where: { username: username } }, function(err, user) 
+                Vendor.findOne({
+                    where: {
+                        email: email
+                    }
+                }, function (err, user) {
+                    // if there are any errors, return the error
+                    if (err)
+                        return done(err);
+                    console.log('hi 3');
+                    // check to see if theres already a user with that email
+                    if (user) {
+                        console.log('hi 4');
+                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    } else {
+                        console.log('hi 5');
+                        // if there is no user with that email
+                        // create the user
+                        var newVendor = new Vendor();
+
+                        // set the user's local credentials
+                        newVendor.local.email = email;
+                        newVendor.local.password = newVendor.generateHash(password);
+
+                        // save the user
+                        newVendor.save(function (err) {
+                            if (err)
+                                throw err;
+                            return done(null, newVendor);
+>>>>>>> test
                         });
                     }
 
@@ -81,6 +146,7 @@ module.exports = function (passport) {
 
             });
 
+<<<<<<< HEAD
         }));
 
     // =========================================================================
@@ -117,5 +183,44 @@ module.exports = function (passport) {
             });
 
         }));
+=======
+        }));*/
 
+        passport.use(new LocalStrategy(
+            // Our user will sign in using an email, rather than a "username"
+            {
+              usernameField: 'email'
+            },
+            function(email, password, done) {
+                console.log('>>>>>>>>>>>>>>>>>>>');
+                console.log('email', email);
+                console.log('password', password);
+                console.log('>>>>>>>>>>>>>>>>>>>');
+              // When a user tries to sign in this code runs
+              db.Vendor.findOne({
+                where: {
+                  email
+                }
+              }).then(function(vendor) {
+                console.log('vendor', vendor);
+                // If there's no user with the given email
+                if (!vendor) {
+                  return done(null, false, {
+                    message: "Incorrect email."
+                  });
+                }
+                // If there is a user with the given email, but the password the user gives us is incorrect
+                else if (!vendor.validPassword(password)) {
+                  return done(null, false, {
+                    message: "Incorrect password."
+                  });
+                }
+                // If none of the above, return the user
+                return done(null, vendor);
+              });
+            }
+          ));
+>>>>>>> test
+
+          console.log('created new local strategy');
 };

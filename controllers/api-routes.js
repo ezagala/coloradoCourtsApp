@@ -1,10 +1,9 @@
 var db = require("../models");
-var passport = require('passport');
 const bcrypt = require("bcrypt-nodejs");
 
 const saltRounds = 10;
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
 
   app.get("/api/vendor", function (req, res) {
     // findAll returns all entries for a table when used with no options
@@ -64,10 +63,27 @@ module.exports = function (app) {
       });
   });
 
+
+  /*app.post('/login', 
+    passport.authenticate('local', { failureRedirect: '/login' }),
+    function(req, res) {
+      console.log('finally')
+      res.redirect('/home');
+    });*/
+
+    /*app.post('/login', (req, res) => {
+      console.log('body', req.body);
+    });*/
+
   app.post('/login',
-  passport.authenticate('local', { successRedirect: '/account',
-                                   failureRedirect: '/signup',
-                                   failureFlash: true })
+    passport.authenticate(
+      'local', 
+      {
+        successRedirect: '/account',
+        failureRedirect: '/signup',
+        failureFlash: true,
+      }
+    )
   );
 
   // Add a vendor 
