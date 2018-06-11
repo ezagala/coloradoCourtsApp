@@ -37,57 +37,7 @@ module.exports = function (passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
-        /*passport.use('local-signup', new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
-        },
-        function (req, email, password, done) {
-            console.log('hi 1');
-            // asynchronous
-            // Vendor.findOne wont fire unless data is sent back
-            process.nextTick(function () {
-                console.log('hi 2');
-                // find a user whose email is the same as the forms email
-                // we are checking to see if the user trying to login already exists
-                //Vendor.findOne({ where: { username: username } }, function(err, user) 
-                Vendor.findOne({
-                    where: {
-                        email: email
-                    }
-                }, function (err, user) {
-                    // if there are any errors, return the error
-                    if (err)
-                        return done(err);
-                    console.log('hi 3');
-                    // check to see if theres already a user with that email
-                    if (user) {
-                        console.log('hi 4');
-                        return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-                    } else {
-                        console.log('hi 5');
-                        // if there is no user with that email
-                        // create the user
-                        var newVendor = new Vendor();
-
-                        // set the user's local credentials
-                        newVendor.local.email = email;
-                        newVendor.local.password = newVendor.generateHash(password);
-
-                        // save the user
-                        newVendor.save(function (err) {
-                            if (err)
-                                throw err;
-                            return done(null, newVendor);
-                        });
-                    }
-
-                });
-
-            });
-
-        }));*/
+ 
 
         passport.use(new LocalStrategy(
             // Our user will sign in using an email, rather than a "username"
