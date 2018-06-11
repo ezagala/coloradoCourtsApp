@@ -10,8 +10,8 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./css/accntRegStyle.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="/js/signup.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   </head>
 
 <body>
@@ -45,7 +45,7 @@
       <div class="col-1"></div>
 
       <div class="col-10" id="createAccount">
-        <p id="please">Please take a few moments to tell us about yourself.<br>Asterisk ( * ) denotes a required field.</p>
+        <p id="please">Please take a few moments to tell us about yourself.</p>
         <hr>
         <form>
           <div class="form-row">
@@ -93,6 +93,8 @@
             </div>
           </div>
 
+          <p><small>Asterisk ( * ) denotes a required field.</small></p>
+
           <button type="submit" class="btn btn-primary btn-block" data-target="#submitModal" id="signUp">Submit!</button>
 
           <!-- Success Modal -->
@@ -109,7 +111,8 @@
                   Please click the "Login!" button below.
                 </div>
                 <div class="modal-footer">
-                  <a type="button" class="btn btn-primary" href="/">Login!</a>
+                  <!-- Removed: href="/" -->
+                  <a type="button" class="btn btn-primary" id="login">Login!</a>
                 </div>
               </div>
             </div>
@@ -146,6 +149,8 @@
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+  <script src="/js/signup.js"></script>
 
   <!-- Script to populate the state dropdown -->
   <script>
