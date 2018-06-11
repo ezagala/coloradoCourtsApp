@@ -110,14 +110,11 @@ $(document).ready(function(){
             certificates: certs.join(", "),
         }
 
-        console.log("The new user is: " + JSON.stringify(user));
+        console.log("The new vendor info is: " + JSON.stringify(user));
 
-        // $.ajax("/api/vendor", {
-        //     type: "PUT",
-        //     data: user
-        // }).then( () => {
-        //     console.log("User in the DB: " + user)
-        // })
+       $.post("/api/vendor", user, (user) => {
+           console.log("New vendor info: " + user); 
+       })
 
         // Disable fields after user selects "yes"
         $(".rateInput").attr("disabled", "disabled");
