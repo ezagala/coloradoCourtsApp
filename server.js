@@ -38,16 +38,10 @@ var db = require("./models");
 // =============================================================
 require("./controllers/api-routes.js")(app, passport);
 
-require("./controllers/html-routes.js")(app);
+require("./controllers/html-routes.js")(app, passport);
   
 // configure logger 
 // app.use(logger("dev"))
-
-const user = {
-    name: "ejzagala@gmail.com",
-    password: "password",
-    id: 1
-}
 
 
 // Syncing our sequelize models and then starting our Express app
