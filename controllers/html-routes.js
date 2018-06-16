@@ -24,10 +24,15 @@ module.exports = function (app, passport) {
   })
 
   // process the signup form
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/account', // redirect to the secure profile section
-    failureRedirect: '/', // redirect back to the signup page if there is an error
-  })); 
+  app.post('/signup', passport.authenticate('local-signup'), (req, res) => {
+    console.log('req.user', req.user);
+    if (req.user) {
+      return res.json('/account');
+    }
+
+    return res.status(400).end();
+    
+  }); 
 
   // myaccount route loads myaccount.html
   // isAuthenticated argument removed for testing purposess
@@ -53,7 +58,7 @@ module.exports = function (app, passport) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on 
-  if (req.isAuthenticated()) {
+  if (req.user) {
       console.log("You're authed motherfucker")
       return next();
     }

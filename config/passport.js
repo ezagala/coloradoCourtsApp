@@ -20,15 +20,15 @@ module.exports = function (passport) {
     passport.serializeUser(function (user, done) {
         console.log('serializeUser');
         console.log("The user is " + JSON.stringify(user));     
-        done(null, user);
+        done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
         console.log('deserializeUser');
         console.log("The id is" + JSON.stringify(id))
-        db.Vendor.findById(id.id).then( (err, user) => {
-            done(err, user); 
+        db.Vendor.findById(id).then(user => {
+            done(null, user); 
         })
     });
 
@@ -42,9 +42,9 @@ module.exports = function (passport) {
         // by default, local strategy uses username and password, we will override with email
         usernameField: 'email',
         passwordField: 'password',
-        passReqToCallback: true // allows us to pass back the entire request to the callback
+        // passReqToCallback: true // allows us to pass back the entire request to the callback
     },
-        function (req, email, password, done) {
+        function (email, password, done) {
             console.log('Inside passport callback');
             // asynchronous
             // Vendor.findOne wont fire unless data is sent back
@@ -56,12 +56,7 @@ module.exports = function (passport) {
                     where: {
                         email: email
                     }
-                }).then((err, vendor) => {
-                    // if there are any errors, return the error
-                    if (err)
-                        return done(err);
-                    console.log('Inside if block that checks for errors');
-                    // check to see if theres already a user with that email
+                }).then((vendor) => {
                     if (vendor) {
                         console.log('Inside if block that checks to see if user exists');
                         return done(null, false, {
@@ -71,7 +66,7 @@ module.exports = function (passport) {
                         console.log('Inside else block that creates the use if no user exits');
 
                         // Encrypt the password 
-                        var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+                        var hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
                         // Create the vendor if one does not already exist w/ that email
                         db.Vendor.create({

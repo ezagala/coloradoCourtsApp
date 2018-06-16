@@ -32,32 +32,35 @@ $(function () {
         } else {
             $('#submitModal').modal("show");
         }
+        $.post('/signup', creds).then(data => {
+            window.location.replace('/account')
+        });
 
-        $("#login").on("click", event => {
-            event.preventDefault();
-            // ajax call to post user
-            $.post('/signup', creds).then(data => {
-                //     console.log("The data posted is" + data);
-                // $.ajax({
-                //     url: "/api/vendor/" + creds.email,
-                //     type: 'PUT',
-                //     data: {
-                //         firstName: user.firstName,
-                //         lastName: user.lastName,
-                //         phone: user.phone,
-                //         address: user.address,
-                //         city: user.city,
-                //         state: user.state,
-                //         zip: user.zip
-                //     },
-                //     success: res => {
-                //         console.log("Vendor updated in nested call")
-                //         // window.location.replace("/account");
-                //     }
-                // })
-            });
+        // $("#login").on("click", event => {
+        //     event.preventDefault();
+        //     // ajax call to post user
+        //     $.post('/signup', creds).then(data => {
+        //         //     console.log("The data posted is" + data);
+        //         // $.ajax({
+        //         //     url: "/api/vendor/" + creds.email,
+        //         //     type: 'PUT',
+        //         //     data: {
+        //         //         firstName: user.firstName,
+        //         //         lastName: user.lastName,
+        //         //         phone: user.phone,
+        //         //         address: user.address,
+        //         //         city: user.city,
+        //         //         state: user.state,
+        //         //         zip: user.zip
+        //         //     },
+        //         //     success: res => {
+        //         //         console.log("Vendor updated in nested call")
+        //         //         // window.location.replace("/account");
+        //         //     }
+        //         // })
+        //     });
 
-        })
+        // })
 
     })
 
