@@ -5,7 +5,6 @@ module.exports = function(sequelize, DataTypes) {
     // Giving the Vendor model a name of type STRING
     vendorId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       validate: {
         len: [1]
       },
@@ -14,14 +13,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate: {
       len: [1]
     }
   },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate: {
       len: [1]
     }
@@ -33,14 +30,12 @@ module.exports = function(sequelize, DataTypes) {
     zip: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate: {
       len: [1]
     }
   },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate: {
       len: [1]
     }

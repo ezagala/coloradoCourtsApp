@@ -1,6 +1,5 @@
 $(function () {
 
-    console.log("I'm here");
 
 
     // Listener that hits post route to add new user
@@ -24,19 +23,40 @@ $(function () {
         // Check to see that object was built correctly
         console.log("The new user is: " + JSON.stringify(user));
 
-            if (user.firstName === "" || user.lastName === "" || user.email === "" || user.password === "") { 
-                $('#validateModal').modal("show");
-                throw new Error("Required fields are blank!"); 
-            } else {
-                $('#submitModal').modal("show");
-            }
+        if (user.firstName === "" || user.lastName === "" || user.email === "" || user.password === "") {
+            $('#validateModal').modal("show");
+            throw new Error("Required fields are blank!");
+        } else {
+            $('#submitModal').modal("show");
+        }
 
-        // ajax call to post user
-        $.post('/signup', user, function (user) {
-            console.log('New user', user);
-        });
+        $("#login").on("click", event => {
+            event.preventDefault();
+            // ajax call to post user
+            $.post('/signup', user).then(data => {
+
+                // console.log("The data posted is" + data);
+                $.ajax({
+                    url: "/api/vendor/" + user.email,
+                    type: 'PUT',
+                    data: {
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        phone: user.phone,
+                        address: user.address,
+                        city: user.city,
+                        state: user.state,
+                        zip: user.zip
+                    },
+                    success: res => console.log("Vendor updated in nested call")
+                })
+            });
+
+        })
 
     })
+
+    console.log("I'm here");
 
     // intialize tooltip
     $(function () {
