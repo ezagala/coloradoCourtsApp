@@ -48,11 +48,10 @@ module.exports = function (passport) {
             console.log('Inside passport callback');
             // asynchronous
             // Vendor.findOne wont fire unless data is sent back
-           // process.nextTick(function () {
+           process.nextTick(function () {
                 console.log('Inside process callback');
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
-                //Vendor.findOne({ where: { username: username } }, function(err, user) 
                 db.Vendor.findOne({
                     where: {
                         email: email
@@ -71,33 +70,24 @@ module.exports = function (passport) {
                     } else {
                         console.log('Inside else block that creates the use if no user exits');
 
-                        
-                        console.log("The user's email is:" + email);
-
                         // Encrypt the password 
                         var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-                        console.log('hash', hash);
 
                         // Create the vendor if one does not already exist w/ that email
                         db.Vendor.create({
                             email: email,
                             password: hash
                         }).then( (Vendor) => {
-                            console.log("newVendor is" +  JSON.stringify(Vendor))
-                            const newVendor = {
-                                email: Vendor.email,
-                                password: Vendor.password
-                            }
+                            console.log("Vendor is" +  JSON.stringify(Vendor))
+                            // ******This is the f*&ckery is located******
+                            // ******This is the f*&ckery is located******
                             return done(null, Vendor);  
+                            // ******This is the f*&ckery is located******
+                            // ******This is the f*&ckery is located******
                         });
-                           
-
-                        // Return the new   
-                        // return done(null, vendor);
                     }
-
                 });
-            //});
+            });
         }));
 
     passport.use('local-login', new LocalStrategy(
@@ -111,11 +101,11 @@ module.exports = function (passport) {
             console.log('password', password);
             console.log('>>>>>>>>>>>>>>>>>>>');
             // When a user tries to sign in this code runs
-            db.Vendor.findOne({
+            Vendor.findOne({
                 where: {
                     email
                 }
-            }).then(function (vendor) {
+            }).then((vendor) => {
                 // If there's no user with the given email
                 if (!vendor) {
                     return done(null, false, {
@@ -128,8 +118,14 @@ module.exports = function (passport) {
                         message: "Incorrect password."
                     });
                 }
+                console.log("This code is being executed")
+        
                 // If none of the above, return the user
+                // ******This is the f*&ckery is located******
+                // ******This is the f*&ckery is located******
                 return done(null, vendor);
+                // ******This is the f*&ckery is located******
+                // ******This is the f*&ckery is located******
             });
         }
     ));
