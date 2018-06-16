@@ -19,6 +19,7 @@ module.exports = function (passport) {
     // used to serialize the user for the session
     passport.serializeUser(function (user, done) {
         console.log('serializeUser');
+        console.log("The user is " + JSON.stringify(user));     
         done(null, user);
     });
 
@@ -47,7 +48,7 @@ module.exports = function (passport) {
             console.log('Inside passport callback');
             // asynchronous
             // Vendor.findOne wont fire unless data is sent back
-            process.nextTick(function () {
+           // process.nextTick(function () {
                 console.log('Inside process callback');
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
@@ -81,14 +82,22 @@ module.exports = function (passport) {
                         db.Vendor.create({
                             email: email,
                             password: hash
-                        }).then( ()=> done(null, vendor) )
+                        }).then( (Vendor) => {
+                            console.log("newVendor is" +  JSON.stringify(Vendor))
+                            const newVendor = {
+                                email: Vendor.email,
+                                password: Vendor.password
+                            }
+                            return done(null, Vendor);  
+                        });
+                           
 
                         // Return the new   
                         // return done(null, vendor);
                     }
 
                 });
-            });
+            //});
         }));
 
     passport.use('local-login', new LocalStrategy(

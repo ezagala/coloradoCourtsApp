@@ -26,7 +26,7 @@ module.exports = function (app, passport) {
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/account', // redirect to the secure profile section
-    failureRedirect: '/signup', // redirect back to the signup page if there is an error
+    failureRedirect: '/', // redirect back to the signup page if there is an error
   })); 
 
   // myaccount route loads myaccount.html
