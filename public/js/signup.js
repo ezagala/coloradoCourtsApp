@@ -37,7 +37,7 @@ $(function () {
             event.preventDefault();
             // ajax call to post user
             $.post('/signup', creds).then(data => {
-
+                window.location.href = '/';
             //     // console.log("The data posted is" + data);
             //     $.ajax({
             //         url: "/api/vendor/" + creds.email,

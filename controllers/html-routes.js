@@ -13,8 +13,9 @@ module.exports = function (app, passport) {
 
   // Local passport authentication
   app.post('/login', passport.authenticate('local-login', {
-      successRedirect: '/account',
+      successRedirect: '/account', // working as expected
       failureRedirect: '/',
+      failureFlash: true,
     })
   );
 
@@ -25,14 +26,17 @@ module.exports = function (app, passport) {
 
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
+    // DOES NOT WORK
     successRedirect: '/account', // redirect to the secure profile section
     failureRedirect: '/signup', // redirect back to the signup page if there is an error
+    failureFlash: true,
   })); 
 
   // myaccount route loads myaccount.html
   // isAuthenticated argument removed for testing purposess
   app.get("/account", isLoggedIn, function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/myaccount.html"));
+    res.sendFile(path.join(__dirname, "../public/availability.html"));
+    //res.sendFile(path.join(__dirname, "../public/myaccount.html"));
   })
 
   // calendar route loads calendar.html

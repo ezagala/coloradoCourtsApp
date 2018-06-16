@@ -73,9 +73,11 @@ module.exports = function (passport) {
                     }
                 }).then((err, vendor) => {
                     // if there are any errors, return the error
-                    if (err)
+                    if (err) {
+                        console.log('err', err);
                         return done(err);
-                    console.log('Inside if block that checks for errors');
+                         
+                    }
                     // check to see if theres already a user with that email
                     if (vendor) {
                         console.log('Inside if block that checks to see if user exists');
@@ -96,7 +98,9 @@ module.exports = function (passport) {
                         db.Vendor.create({
                             email: email,
                             password: hash
-                        }).then( ()=> done(null, vendor) )
+                        }).then( () => {
+                           return done(null, vendor);
+                        })
 
                         // Return the new   
                         // return done(null, vendor);
