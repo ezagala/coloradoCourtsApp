@@ -37,25 +37,24 @@ $(function () {
             event.preventDefault();
             // ajax call to post user
             $.post('/signup', creds).then(data => {
-
-            //     // console.log("The data posted is" + data);
-            //     $.ajax({
-            //         url: "/api/vendor/" + creds.email,
-            //         type: 'PUT',
-            //         data: {
-            //             firstName: user.firstName,
-            //             lastName: user.lastName,
-            //             phone: user.phone,
-            //             address: user.address,
-            //             city: user.city,
-            //             state: user.state,
-            //             zip: user.zip
-            //         },
-            //         success: res => {
-            //             console.log("Vendor updated in nested call")
-            //             window.location.replace("/account");
-            //         }
-            //     })
+                //     console.log("The data posted is" + data);
+                // $.ajax({
+                //     url: "/api/vendor/" + creds.email,
+                //     type: 'PUT',
+                //     data: {
+                //         firstName: user.firstName,
+                //         lastName: user.lastName,
+                //         phone: user.phone,
+                //         address: user.address,
+                //         city: user.city,
+                //         state: user.state,
+                //         zip: user.zip
+                //     },
+                //     success: res => {
+                //         console.log("Vendor updated in nested call")
+                //         // window.location.replace("/account");
+                //     }
+                // })
             });
 
         })
