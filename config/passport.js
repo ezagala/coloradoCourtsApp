@@ -37,6 +37,21 @@ module.exports = function (passport) {
     // we are using named strategies since we have one for login and one for signup
     // by default, if there was no name, it would just be called 'local'
 
+/*
+        passport.use(new LocalStrategy(
+            // Our user will sign in using an email, rather than a "username"
+            {
+              usernameField: 'email'
+            },
+            function(email, password, done) {
+                console.log('>>>>>>>>>>>>>>>>>>>');
+                console.log('email', email);
+                console.log('password', password);
+                console.log('>>>>>>>>>>>>>>>>>>>');
+              // When a user tries to sign in this code runs
+              db.Vendor.findOne({
+*/
+
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField: 'email',
