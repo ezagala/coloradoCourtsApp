@@ -3,7 +3,7 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function(sequelize, DataTypes) {
   var Vendor = sequelize.define("Vendor", {
     // Giving the Vendor model a name of type STRING
-    vendorId: {
+    id: {
       type: DataTypes.INTEGER,
       validate: {
         len: [1]

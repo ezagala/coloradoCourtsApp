@@ -25,10 +25,10 @@ module.exports = function (passport) {
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
         console.log('deserializeUser');
-        Vendor.findById(id, function (err, user) {
-            done(err, user);
-        });
-        //done(null, user);
+        console.log("The id is" + JSON.stringify(id))
+        db.Vendor.findById(id.id).then( (err, user) => {
+            done(err, user); 
+        })
     });
 
     // =========================================================================
@@ -96,10 +96,10 @@ module.exports = function (passport) {
                         db.Vendor.create({
                             email: email,
                             password: hash
-                        })
+                        }).then( ()=> done(null, vendor) )
 
-                        // Return the new 
-                        return done(null, vendor);
+                        // Return the new   
+                        // return done(null, vendor);
                     }
 
                 });
@@ -122,7 +122,6 @@ module.exports = function (passport) {
                     email
                 }
             }).then(function (vendor) {
-                console.log('theVendorIs:', vendor);
                 // If there's no user with the given email
                 if (!vendor) {
                     return done(null, false, {
