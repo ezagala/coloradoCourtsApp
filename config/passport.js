@@ -42,9 +42,9 @@ module.exports = function (passport) {
         // by default, local strategy uses username and password, we will override with email
         usernameField: 'email',
         passwordField: 'password',
-        // passReqToCallback: true // allows us to pass back the entire request to the callback
+        passReqToCallback: true // allows us to pass back the entire request to the callback
     },
-        function (email, password, done) {
+        function (req, email, password, done) {
             console.log('Inside passport callback');
             // asynchronous
             // Vendor.findOne wont fire unless data is sent back
@@ -68,17 +68,20 @@ module.exports = function (passport) {
                         // Encrypt the password 
                         var hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
+                        console.log(`
+                        Here is the new user -
+                        first name: ${req.firstName}
+                        last name: ${req.lastName}
+                        phone: ${req.phone}
+                        `)
+
                         // Create the vendor if one does not already exist w/ that email
                         db.Vendor.create({
                             email: email,
                             password: hash
                         }).then( (Vendor) => {
                             console.log("Vendor is" +  JSON.stringify(Vendor))
-                            // ******This is the f*&ckery is located******
-                            // ******This is the f*&ckery is located******
                             return done(null, Vendor);  
-                            // ******This is the f*&ckery is located******
-                            // ******This is the f*&ckery is located******
                         });
                     }
                 });
@@ -96,7 +99,7 @@ module.exports = function (passport) {
             console.log('password', password);
             console.log('>>>>>>>>>>>>>>>>>>>');
             // When a user tries to sign in this code runs
-            Vendor.findOne({
+            db.Vendor.findOne({
                 where: {
                     email
                 }
@@ -114,13 +117,8 @@ module.exports = function (passport) {
                     });
                 }
                 console.log("This code is being executed")
-        
                 // If none of the above, return the user
-                // ******This is the f*&ckery is located******
-                // ******This is the f*&ckery is located******
                 return done(null, vendor);
-                // ******This is the f*&ckery is located******
-                // ******This is the f*&ckery is located******
             });
         }
     ));

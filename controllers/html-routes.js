@@ -29,9 +29,7 @@ module.exports = function (app, passport) {
     if (req.user) {
       return res.json('/account');
     }
-
     return res.status(400).end();
-    
   }); 
 
   // myaccount route loads myaccount.html
@@ -43,7 +41,7 @@ module.exports = function (app, passport) {
   // calendar route loads calendar.html
   app.get("/availability", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/availability.html"));
-  })
+  })  
 
 
   // Sign out route 

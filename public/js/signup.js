@@ -14,6 +14,8 @@ $(function () {
 
         // Capture vales and build obejct to pass into ajax call
         const user = {
+            email: $("#email").val().trim(),
+            password: $("#password").val().trim(),
             firstName: $("#firstName").val().trim(),
             lastName: $("#lastName").val().trim(),
             phone: $("#phone").val().trim(),
@@ -26,13 +28,16 @@ $(function () {
         // Check to see that object was built correctly
         console.log("The new user is: " + JSON.stringify(user));
 
+        // Form validation for blank fields 
         if (user.firstName === "" || user.lastName === "" || user.email === "" || user.password === "") {
             $('#validateModal').modal("show");
             throw new Error("Required fields are blank!");
         } else {
             $('#submitModal').modal("show");
         }
-        $.post('/signup', creds).then(data => {
+        
+        // Hit signup route with user object, this runs the passport strategy
+        $.post('/signup', user).then(data => {
             window.location.replace('/account')
         });
 
