@@ -1,12 +1,17 @@
 // IIFE to execute code immediately upon page load 
-// All code should be added inside this scope unless it *should not* be executed immediately
-// This thing is currently f$%king my ajax calls and I have no idea why 
-$(document).ready(function(){
+$(document).ready(function () {
 
-    // This will populate the fields with the user's information. (Still need to add some conditional logic)
+    const user = {};
+
+    // This will populate the fields with the user's information
+    // (Also, this is suuuuuper hacky)
     $.get("/api/vendor", function (data, status) {
+        // View data 
         console.log(data);
-        vendor = data[0];
+        // 
+        const vendor = data[0];
+        // Need to capture this to send with any info that is updated on the personal/vendor forms
+        user.email = vendor.email;
         $("#firstName").attr("placeholder", vendor.firstName);
         $("#lastName").attr("placeholder", vendor.lastName);
         $("#email").attr("placeholder", vendor.email);
@@ -18,10 +23,8 @@ $(document).ready(function(){
         $("#rates").attr("placeholder", vendor.rate);
     })
 
-    // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
-    $('[data-toggle="tooltip"]').tooltip()
 
-    // Listener targeting the edit button that enables/disables personal info fields
+    // Enable/disable personal info fields
     $("#personalEdit").on("click", event => {
         event.preventDefault();
 
@@ -35,7 +38,7 @@ $(document).ready(function(){
         }
     });
 
-    // Listener targeting the edit button that enables/disables rate field 
+    // Enable/disable rate field 
     $("#vendorEdit").on("click", event => {
         event.preventDefault();
 
@@ -50,29 +53,52 @@ $(document).ready(function(){
     })
 
 
-    // Listener that captures data and hits the api route 
+    // Capture data and hit the api route 
     $("#personalYes").on("click", function (event) {
 
         event.preventDefault();
 
-        // Capture vales and build obejct to pass into ajax call
-        const user = {
-            firstName: $("#firstName").val().trim(),
-            lastName: $("#lastName").val().trim(),
-            phone: $("#phone").val().trim(),
-            address: $("#address").val().trim(),
-            city: $("#city").val().trim(),
-            state: $("#state").val().trim(),
-            zip: $("#zip").val().trim(),
-            email: $("#email").val().trim(),
-            password: $("#password").val().trim()
-        }
+        // Loop through form inputs
+        $(".personalInput").each(function (element) {
+            // Check to see if the input is empty 
+            if ($(this).val() === "") {
+                console.log("No new value to input.")
+            } else {
+                // Update the user object if info has been provided 
+                switch ($(this).attr("id")) {
+                    case "firstName":
+                        user.firstName = $(this).val();
+                        break;
+                    case "lastName":
+                        user.lastName = $(this).val();
+                        break;
+                    case "phone":
+                        user.phone = $(this).val();
+                        break;
+                    case "address":
+                        user.address = $(this).val();
+                        break;
+                    case "city":
+                        user.city = $(this).val();
+                        break;
+                    case "state":
+                        user.state = $(this).val();
+                        break;
+                    case "zip":
+                        user.zip = $(this).val();
+                        break;
+                    default:
+                        console.log("No new user information added.")
+                }
+            }
+        });
 
-        console.log("The new user is: " + user);
+        // Log the updated user
+        console.log("The new user is: " + JSON.stringify(user));
 
-
-        $.post("/api/vendor", {
-            type: "POST",
+        // Make the ajax call 
+        $.ajax("/api/vendor/" + user.email, {
+            type: "PUT",
             data: user
         }).then(() => {
             console.log("User in the DB: " + user)
@@ -87,6 +113,7 @@ $(document).ready(function(){
 
         event.preventDefault();
 
+        // Loop through language inputs and build an array with the selected values
         const languages = [];
 
         $(".language").each(function (index) {
@@ -95,6 +122,7 @@ $(document).ready(function(){
             }
         });
 
+        // Loop through cert inputs and build an array with the selected values
         const certs = [];
 
         $(".cert").each(function (index) {
@@ -104,23 +132,27 @@ $(document).ready(function(){
         });
 
         // Capture vales and build obejct to pass into ajax call
-        const user = {
-            rate: $("#rates").val().trim(),
-            languages: languages.join(", "),
-            certificates: certs.join(", "),
-        }
+        user.rate = $("#rates").val().trim();
+        user.languages = languages.join(", ");
+        user.certificates = certs.join(", ");
 
         console.log("The new vendor info is: " + JSON.stringify(user));
 
-       $.post("/api/vendor", user, (user) => {
-           console.log("New vendor info: " + user); 
-       })
+        // Make the ajax call 
+        $.ajax("/api/vendor/" + user.email, {
+            type: "PUT",
+            data: user
+        }).then(() => {
+            console.log("User in the DB: " + JSON.stringify(user))
+        })
 
         // Disable fields after user selects "yes"
         $(".rateInput").attr("disabled", "disabled");
 
-
     });
+
+    // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
+    $('[data-toggle="tooltip"]').tooltip()
 
 })
 

@@ -9,6 +9,7 @@ module.exports = function (app, passport) {
   // index route loads index.html
   app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
+    console.log("req from ln 12 html-routes", req.body)
   })
 
   // Local passport authentication
@@ -25,7 +26,7 @@ module.exports = function (app, passport) {
 
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup'), (req, res) => {
-    console.log('req.user', req.user);
+    // console.log('req.user from ln 28 html-routes', req.user);
     if (req.user) {
       return res.json('/account');
     }
@@ -34,7 +35,7 @@ module.exports = function (app, passport) {
 
   // myaccount route loads myaccount.html
   // isAuthenticated argument removed for testing purposess
-  app.get("/account", isLoggedIn, function (req, res) {
+  app.get("/account/", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/myaccount.html"));
   })
 
@@ -57,7 +58,7 @@ module.exports = function (app, passport) {
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on 
   if (req.user) {
-      console.log("You're authed motherfucker")
+      console.log("You're authenticated")
       return next();
     }
   // if they aren't redirect them to the home page
