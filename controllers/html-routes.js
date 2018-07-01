@@ -1,55 +1,67 @@
 const path = require("path");
-const passport = require("passport");
-const express = require("express")
-// const router = express.Router()
-
-const isAuthenticated = (request, response, next) => {
-  if ( !request.user ) {
-      // request.flash('You must be logged in for that.')
-      response.redirect('/')
-  } else {
-      return next()
-  }
-}
-// const app = express();
 
 // Routes
 // =============================================================
-module.exports = function(app) {
+module.exports = function (app, passport) {
 
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   // index route loads index.html
   app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
+    console.log("req from ln 12 html-routes", req.body)
   })
+
+  // Local passport authentication
+  app.post('/login', passport.authenticate('local-login', {
+      successRedirect: '/account',
+      failureRedirect: '/',
+    })
+  );
 
   // signup route loads signup.html
   app.get("/signup", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   })
 
+  // process the signup form
+  app.post('/signup', passport.authenticate('local-signup'), (req, res) => {
+    // console.log('req.user from ln 28 html-routes', req.user);
+    if (req.user) {
+      return res.json('/account');
+    }
+    return res.status(400).end();
+  }); 
+
   // myaccount route loads myaccount.html
   // isAuthenticated argument removed for testing purposess
-  app.get("/account", function (req, res) {
+  app.get("/account/", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/myaccount.html"));
   })
 
   // calendar route loads calendar.html
-  app.get("/availability", function (req, res) {
+  app.get("/availability", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/availability.html"));
-  })
+  })  
 
- // Local passport authentication
-  app.post('/login',
-    passport.authenticate('local', {
-      successRedirect: '/account',
-      failureRedirect: '/',
-    }),
-    function(req,res){
-      console.log("redirect")
-      res.redirect("/")
-    }
-  );
-  
+
+  // Sign out route 
+  app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
 };
+
+// This is currently busted. Probably a result of the isAuthenticated method
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+  // if user is authenticated in the session, carry on 
+  if (req.user) {
+      console.log("You're authenticated")
+      return next();
+    }
+  // if they aren't redirect them to the home page
+  res.redirect('/');
+  console.log("You're not authenticated.")
+}

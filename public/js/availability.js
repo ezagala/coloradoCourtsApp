@@ -1,12 +1,6 @@
 // IIFE to execute code immediately upon page load 
-// All code should be added inside this scope unless it *should not* be executed immediately
 $(function () {
 
-
-    console.log("I'm here.")
-
-    // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
-    $('[data-toggle="tooltip"]').tooltip();
 
     // Button event that will git the calendar api
     $('#createEventbutton').on('click', event => {
@@ -41,21 +35,10 @@ $(function () {
             },
           };
 
-        // Method that creates the event on the users calendar 
-        calendar.events.insert({
-            auth: auth,
-            calendarId: 'primary',
-            resource: event,
-          }, function(err, event) {
-            if (err) {
-              console.log('There was an error contacting the Calendar service: ' + err);
-              return;
-            }
-            console.log('Event created: %s', event.htmlLink);
-          });
-
     })
 
     
+    // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
+    $('[data-toggle="tooltip"]').tooltip();
 
 }); 

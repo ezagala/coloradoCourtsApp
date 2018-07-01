@@ -2,17 +2,23 @@ module.exports = function(sequelize, DataTypes) {
   var VendorAvailability = sequelize.define("VendorAvailability", {
     vendor_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+      allowNull: false
     },
-    courthouse_id: {
-      type: DataTypes.INTEGER,
+    courthouse: {
+      type: DataTypes.STRING
     },
-    vendor_availability: {
-      type: DataTypes.TEXT,
+    notes: {
+      type: DataTypes.TEXT
     },
+    start: {
+      type: DataTypes.DATE
+    },
+    end: {
+      type: DataTypes.DATE
+    }, 
+    recurrence: {
+      type: DataTypes.STRING
+    }
   });
 
   VendorAvailability.associate = function(models) {

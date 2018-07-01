@@ -3,84 +3,45 @@ const bodyParser = require("body-parser")
 const session = require("express-session")
 const logger = require("morgan")
 const passport = require('passport')
-LocalStrategy = require('passport-local').Strategy;
-
-
+// const flash = require('express-flash');
+const cookieParser = require('cookie-parser');
 const app = express()
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
+
+// passport stuff
+app.use(session({ secret: 'cats'}));
+app.use(passport.initialize());
+app.use(passport.session());
+// app.use(flash());
+
+require('./config/passport')(passport);
+
+// configure local passport
+// app.use(session({ secret: 'cats', resave: true, saveUninitialized: true  }));
+app.use(session({ secret: 'cats'}));
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: false
-}))
+}));
+app.use(cookieParser()); 
 
-// configure local passport
-app.use(session({ secret: 'keyboard cat' }));
-app.use(passport.initialize());
-app.use(passport.session());
+//require('./config/passport')(passport);
 app.use(express.static("public"))
 
 // configure logger 
 app.use(logger("dev"))
+
+// error-handling
 
 // Requiring our models for syncing
 var db = require("./models");
 
 // Routes
 // =============================================================
-require("./controllers/api-routes.js")(app);
-require("./controllers/html-routes.js")(app);
+require("./controllers/api-routes.js")(app, passport);
 
-
-// configure logger 
-// app.use(logger("dev"))
-
-
-const user = {
-    name: "ejzagala@gmail.com",
-    password: "password",
-    id: 1
-}
-
-
-// defining  local authentication strategy 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    // USER IS A MODEL NEED TO UPDATE
-    
-    if (!username === user.name){
-        return done(null, false, { message: "incorrect username"})
-    } 
-    if (!password === user.password){
-        console.log(password, user.password)
-        return done(null, false, { message: "incorrect password"})
-    }
-
-    return done(null, user)
-  
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-  
-passport.deserializeUser(function(id, done) {
-    // User.findById(id, function(err, user) {
-      done( null, user);
-      // done( err, user); this is the original
-    // });
-  });
+require("./controllers/html-routes.js")(app, passport);
 
 
 // Syncing our sequelize models and then starting our Express app

@@ -1,130 +1,158 @@
-// This will populate the fields with the user's information. (Still need to add some conditional logic)
-$.get("/api/vendor", function(data, status) {
-    console.log(data);
-    vendor = data[0]; 
-    $("#firstName").attr("placeholder", vendor.firstName);
-    $("#lastName").attr("placeholder", vendor.lastName); 
-    $("#email").attr("placeholder", vendor.email);
-    $("#phone").attr("placeholder", vendor.phone);
-    $("#address").attr("placeholder", vendor.address);
-    $("#city").attr("placeholder", vendor.city);
-    $("#state").find("option").empty().attr("selected", "selected").append(vendor.state); 
-    $("#zip").attr("placeholder", vendor.zip);
-    $("#rates").attr("placeholder", vendor.rate);
-})
-
 // IIFE to execute code immediately upon page load 
-// All code should be added inside this scope unless it *should not* be executed immediately
-// This thing is currently f$%king my ajax calls and I have no idea why 
-$(function() {
+$(document).ready(function () {
 
-    // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
-    $('[data-toggle="tooltip"]').tooltip()
+    const user = {};
 
-    // Listener targeting the edit button that enables/disables personal info fields
+    // This will populate the fields with the user's information
+    // (Also, this is suuuuuper hacky)
+    $.get("/api/vendor", function (data, status) {
+        // View data 
+        console.log(data);
+        // 
+        const vendor = data[0];
+        // Need to capture this to send with any info that is updated on the personal/vendor forms
+        user.email = vendor.email;
+        $("#firstName").attr("placeholder", vendor.firstName);
+        $("#lastName").attr("placeholder", vendor.lastName);
+        $("#email").attr("placeholder", vendor.email);
+        $("#phone").attr("placeholder", vendor.phone);
+        $("#address").attr("placeholder", vendor.address);
+        $("#city").attr("placeholder", vendor.city);
+        $("#state").find("option").empty().attr("selected", "selected").append(vendor.state);
+        $("#zip").attr("placeholder", vendor.zip);
+        $("#rates").attr("placeholder", vendor.rate);
+    })
+
+
+    // Enable/disable personal info fields
     $("#personalEdit").on("click", event => {
         event.preventDefault();
 
         let attr = $(".personalInput").attr("disabled");
-            
+
         if (attr === "disabled") {
-         $(".personalInput").removeAttr("disabled");
-         attr = undefined; 
-        } else if (attr === undefined){
+            $(".personalInput").removeAttr("disabled");
+            attr = undefined;
+        } else if (attr === undefined) {
             $(".personalInput").attr("disabled", "disabled");
         }
     });
 
-    // Listener targeting the edit button that enables/disables rate field 
+    // Enable/disable rate field 
     $("#vendorEdit").on("click", event => {
-        event.preventDefault(); 
+        event.preventDefault();
 
         let attr = $(".rateInput").attr("disabled");
-            
+
         if (attr === "disabled") {
-         $(".rateInput").removeAttr("disabled");
-         attr = undefined; 
-        } else if (attr === undefined){
+            $(".rateInput").removeAttr("disabled");
+            attr = undefined;
+        } else if (attr === undefined) {
             $(".rateInput").attr("disabled", "disabled");
         }
     })
-    
 
-    // Listener that captures data and hits the api route 
-    $("#personalYes").on("click", function(event) {
+
+    // Capture data and hit the api route 
+    $("#personalYes").on("click", function (event) {
 
         event.preventDefault();
 
-         // Capture vales and build obejct to pass into ajax call
-         const user = {
-            firstName: $("#firstName").val().trim(), 
-            lastName: $("#lastName").val().trim(), 
-            phone: $("#phone").val().trim(),
-            address: $("#address").val().trim(),
-            city: $("#city").val().trim(), 
-            state: $("#state").val().trim(), 
-            zip: $("#zip").val().trim(),
-            email: $("#email").val().trim(), 
-            password: $("#password").val().trim()
-         }
+        // Loop through form inputs
+        $(".personalInput").each(function (element) {
+            // Check to see if the input is empty 
+            if ($(this).val() === "") {
+                console.log("No new value to input.")
+            } else {
+                // Update the user object if info has been provided 
+                switch ($(this).attr("id")) {
+                    case "firstName":
+                        user.firstName = $(this).val();
+                        break;
+                    case "lastName":
+                        user.lastName = $(this).val();
+                        break;
+                    case "phone":
+                        user.phone = $(this).val();
+                        break;
+                    case "address":
+                        user.address = $(this).val();
+                        break;
+                    case "city":
+                        user.city = $(this).val();
+                        break;
+                    case "state":
+                        user.state = $(this).val();
+                        break;
+                    case "zip":
+                        user.zip = $(this).val();
+                        break;
+                    default:
+                        console.log("No new user information added.")
+                }
+            }
+        });
 
-         console.log("The new user is: " + user); 
+        // Log the updated user
+        console.log("The new user is: " + JSON.stringify(user));
 
-        // Fucked ajax call 
-
-        $.get("/api/vendor", {
-            type: "POST",
+        // Make the ajax call 
+        $.ajax("/api/vendor/" + user.email, {
+            type: "PUT",
             data: user
-        }).then( () => {
+        }).then(() => {
             console.log("User in the DB: " + user)
         })
 
         // Disable fields 
         $(".personalInput").attr("disabled", "disabled");
-        
+
     });
 
     $("#vendorYes").on("click", function (event) {
 
         event.preventDefault();
 
-        const languages = []; 
+        // Loop through language inputs and build an array with the selected values
+        const languages = [];
 
-       $(".language").each(function (index) {
-            if ($(this).is(":checked")){
-                languages.push($(this).attr("value")); 
+        $(".language").each(function (index) {
+            if ($(this).is(":checked")) {
+                languages.push($(this).attr("value"));
             }
-        }); 
+        });
 
-        const certs = []; 
+        // Loop through cert inputs and build an array with the selected values
+        const certs = [];
 
-       $(".cert").each(function (index) {
-            if ($(this).is(":checked")){
-                certs.push($(this).attr("value")); 
+        $(".cert").each(function (index) {
+            if ($(this).is(":checked")) {
+                certs.push($(this).attr("value"));
             }
-        }); 
+        });
 
-         // Capture vales and build obejct to pass into ajax call
-         const user = {
-            rate: $("#rates").val().trim(), 
-            languages: languages.join(", "), 
-            certificates: certs.join(", "),
-         }
+        // Capture vales and build obejct to pass into ajax call
+        user.rate = $("#rates").val().trim();
+        user.languages = languages.join(", ");
+        user.certificates = certs.join(", ");
 
-         console.log("The new user is: " + JSON.stringify(user)); 
+        console.log("The new vendor info is: " + JSON.stringify(user));
 
-        // $.ajax("/api/vendor", {
-        //     type: "PUT",
-        //     data: user
-        // }).then( () => {
-        //     console.log("User in the DB: " + user)
-        // })
+        // Make the ajax call 
+        $.ajax("/api/vendor/" + user.email, {
+            type: "PUT",
+            data: user
+        }).then(() => {
+            console.log("User in the DB: " + JSON.stringify(user))
+        })
 
         // Disable fields after user selects "yes"
         $(".rateInput").attr("disabled", "disabled");
-        
 
     });
+
+    // Initialize tooltip method, for the tooptips set up on "home" & "sign out" buttons
+    $('[data-toggle="tooltip"]').tooltip()
 
 })
 

@@ -1,9 +1,10 @@
-const db = require("../models");
+var db = require("../models");
+var passport = require('passport');
 const bcrypt = require("bcrypt-nodejs");
 
 const saltRounds = 10;
 
-module.exports = function (app, passport) {
+module.exports = function (app) {
 
   app.get("/api/vendor", function (req, res) {
     // findAll returns all entries for a table when used with no options
@@ -36,9 +37,9 @@ module.exports = function (app, passport) {
       });
   });
 
-  app.put("/api/vendor/:email", function (req, res) {
+  app.put("/api/vendor/:id", function (req, res) {
     console.log(req.body);
-    const email = req.params.email
+    const id = req.params.id
     db.Vendor.update(
       {
         vendorId: req.body.vendorId,
@@ -56,11 +57,34 @@ module.exports = function (app, passport) {
         certificates: req.body.certificates,
         approved: req.body.approved
       },
-      { where: { email: email } }
+      { where: { id: id } }
     )
       .then(function (dbVendor) {
         res.json(dbVendor);
       });
   });
 
+  app.post('/login',
+  passport.authenticate('local', { successRedirect: '/account',
+                                   failureRedirect: '/signup',
+                                   failureFlash: true })
+  );
+
+  // Add a member
+  app.post("/signup", function(req, res) {
+
+    console.log('req.body', req.body);
+    
+    var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    console.log('hash', hash);
+
+    db.User.create({
+      email: req.body.email,
+      username: req.body.username,
+      password: hash
+    }).done(function(m) {
+      res.send(req.body.email)
+    });
+    
+  });
 };
