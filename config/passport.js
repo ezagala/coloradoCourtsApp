@@ -19,16 +19,14 @@ module.exports = function (passport) {
     // used to serialize the user for the session
     passport.serializeUser(function (user, done) {
         console.log('serializeUser');
-        console.log("The user is " + JSON.stringify(user));     
-        done(null, user);
+        // console.log("The user is " + JSON.stringify(user));     
+        done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function (id, done) {
-        console.log('deserializeUser');
-        console.log("The id is" + JSON.stringify(id))
-        db.Vendor.findById(id.id).then( (err, user) => {
-            done(err, user); 
+        db.Vendor.findById(id).then(user => {
+            done(null, user); 
         })
     });
 
@@ -56,14 +54,9 @@ module.exports = function (passport) {
                     where: {
                         email: email
                     }
-                }).then((err, vendor) => {
-                    // if there are any errors, return the error
-                    if (err)
-                        return done(err);
-                    console.log('Inside if block that checks for errors');
-                    // check to see if theres already a user with that email
+                }).then((vendor) => {
                     if (vendor) {
-                        console.log('Inside if block that checks to see if user exists');
+                        console.log('Inside if block that checks to see if the creds exists');
                         return done(null, false, {
                             message: "This email already exists"
                         });
@@ -71,19 +64,30 @@ module.exports = function (passport) {
                         console.log('Inside else block that creates the use if no user exits');
 
                         // Encrypt the password 
-                        var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+                        const hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+
+                        console.log(`
+                        Here is the new user -
+                        first name: ${req.body.firstName}
+                        last name: ${req.body.lastName}
+                        phone: ${req.body.phone}
+                        `)
 
                         // Create the vendor if one does not already exist w/ that email
                         db.Vendor.create({
                             email: email,
-                            password: hash
+                            password: hash,
+                            firstName: req.body.firstName, 
+                            lastName: req.body.lastName, 
+                            phone: req.body.phone, 
+                            address: req.body.address, 
+                            city: req.body.city, 
+                            state: req.body.state, 
+                            zip: req.body.zip
+
                         }).then( (Vendor) => {
-                            console.log("Vendor is" +  JSON.stringify(Vendor))
-                            // ******This is the f*&ckery is located******
-                            // ******This is the f*&ckery is located******
+                            console.log("Vendor is (ln 89)" +  JSON.stringify(Vendor))
                             return done(null, Vendor);  
-                            // ******This is the f*&ckery is located******
-                            // ******This is the f*&ckery is located******
                         });
                     }
                 });
@@ -101,7 +105,7 @@ module.exports = function (passport) {
             console.log('password', password);
             console.log('>>>>>>>>>>>>>>>>>>>');
             // When a user tries to sign in this code runs
-            Vendor.findOne({
+            db.Vendor.findOne({
                 where: {
                     email
                 }
@@ -119,13 +123,8 @@ module.exports = function (passport) {
                     });
                 }
                 console.log("This code is being executed")
-        
                 // If none of the above, return the user
-                // ******This is the f*&ckery is located******
-                // ******This is the f*&ckery is located******
                 return done(null, vendor);
-                // ******This is the f*&ckery is located******
-                // ******This is the f*&ckery is located******
             });
         }
     ));

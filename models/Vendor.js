@@ -1,28 +1,19 @@
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Vendor = sequelize.define("Vendor", {
     // Giving the Vendor model a name of type STRING
     id: {
       type: DataTypes.INTEGER,
-      validate: {
-        len: [1]
-      },
       autoIncrement: true,
       primaryKey: true,
     },
     firstName: {
       type: DataTypes.STRING,
-      validate: {
-      len: [1]
-    }
-  },
+    },
     lastName: {
       type: DataTypes.STRING,
-      validate: {
-      len: [1]
-    }
-  },
+    },
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
@@ -30,23 +21,17 @@ module.exports = function(sequelize, DataTypes) {
     zip: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      validate: {
-      len: [1]
-    }
-  },
+    },
     password: {
       type: DataTypes.STRING,
-      validate: {
-      len: [1]
-    }
-  },
+    },
     rate: DataTypes.STRING,
     languages: DataTypes.STRING,
     certificates: DataTypes.STRING,
-    approved: DataTypes.BOOLEAN,
+    // approved: DataTypes.BOOLEAN,
   });
 
-  Vendor.associate = function(models) {
+  Vendor.associate = function (models) {
     // Associating Vendor with VendorAvailabilities
     // When an Vendor is deleted, also delete any associated VendorAvailabilitys
     Vendor.hasMany(models.VendorAvailability, {
@@ -60,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
   // Creating a custom method for our Member model. 
   //This will check if an unhashed password entered by the 
   //user can be compared to the hashed password stored in our database
-  Vendor.prototype.validPassword = function(password) {
+  Vendor.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   };
 

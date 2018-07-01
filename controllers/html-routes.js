@@ -9,6 +9,7 @@ module.exports = function (app, passport) {
   // index route loads index.html
   app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
+    console.log("req from ln 12 html-routes", req.body)
   })
 
   // Local passport authentication
@@ -24,21 +25,24 @@ module.exports = function (app, passport) {
   })
 
   // process the signup form
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/account', // redirect to the secure profile section
-    failureRedirect: '/', // redirect back to the signup page if there is an error
-  })); 
+  app.post('/signup', passport.authenticate('local-signup'), (req, res) => {
+    // console.log('req.user from ln 28 html-routes', req.user);
+    if (req.user) {
+      return res.json('/account');
+    }
+    return res.status(400).end();
+  }); 
 
   // myaccount route loads myaccount.html
   // isAuthenticated argument removed for testing purposess
-  app.get("/account", isLoggedIn, function (req, res) {
+  app.get("/account/", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/myaccount.html"));
   })
 
   // calendar route loads calendar.html
   app.get("/availability", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/availability.html"));
-  })
+  })  
 
 
   // Sign out route 
@@ -53,8 +57,8 @@ module.exports = function (app, passport) {
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
   // if user is authenticated in the session, carry on 
-  if (req.isAuthenticated()) {
-      console.log("You're authed motherfucker")
+  if (req.user) {
+      console.log("You're authenticated")
       return next();
     }
   // if they aren't redirect them to the home page
