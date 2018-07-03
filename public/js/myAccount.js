@@ -23,7 +23,6 @@ $(document).ready(function () {
         $("#rates").attr("placeholder", vendor.rate);
     })
 
-
     // Enable/disable personal info fields
     $("#personalEdit").on("click", event => {
         event.preventDefault();
