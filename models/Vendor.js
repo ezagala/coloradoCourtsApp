@@ -31,13 +31,15 @@ module.exports = function (sequelize, DataTypes) {
     // approved: DataTypes.BOOLEAN,
   });
 
-  Vendor.associate = function (models) {
-    // Associating Vendor with VendorAvailabilities
-    // When an Vendor is deleted, also delete any associated VendorAvailabilitys
-    Vendor.hasMany(models.VendorAvailability, {
-      onDelete: "cascade",
-    });
-  };
+  // This join is none opp. 
+
+  // Vendor.associate = function (models) {
+  //   // Associating Vendor with VendorAvailabilities
+  //   // When an Vendor is deleted, also delete any associated VendorAvailabilitys
+  //   Vendor.hasMany(models.VendorAvailability, {
+  //     onDelete: "cascade",
+  //   });
+  // };
 
   // Syncs with DB
   Vendor.sync();
