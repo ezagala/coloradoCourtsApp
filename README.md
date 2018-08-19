@@ -1,2 +1,2 @@
-# Interpeter Manger 
-This app was intended to be a proof of concept for the Colorado court system. Its purpose was supposed to allow interpreters to better manage their availability. It is unfinished. However, it is deployed in its current state [here](https://tranquil-atoll-80899.herokuapp.com/). 
+# Interpreter Manager 
+This app was intended to be a proof of concept for the Colorado court system. Its purpose was to allow interpreters to better manage their availability. It is unfinished. However, it is deployed in its current state [here](https://tranquil-atoll-80899.herokuapp.com/). 
